@@ -1,157 +1,106 @@
-.ss-content.my-library-genre-list,
-.ss-content.ss-open-below.my-library-genre-list,
-.ss-content.my-library-genre-list .ss-list {
-  border: none;
+.wrap-select-my-library {
+  display: flex;
 }
 
-//? іконка вверх/вниз
-.ss-main.my-library-genre-list .ss-arrow path {
-  stroke: $text-color;
-}
-
-//?  вибраний жанр в інпуті
-.ss-main.my-library-genre-list .ss-values .ss-single {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.18;
-  color: $color-subtitles;
-}
-
-//? контейнер з селектом
-.ss-main.my-library-genre-list {
-  background: #1c1c1c;
-
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 20px;
-  padding-right: 12px;
-  border-width: 0.5px;
-  border-style: solid;
-  border-color: rgba(248, 248, 248, 0.2);
-
-  @include tablet {
-    max-width: 185px;
-    max-height: 44px;
-    margin-bottom: 36px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    padding-left: 20px;
-    padding-right: 14px;
-  }
-
-  @include desktop {
-    max-width: 260px;
-    max-height: 48px;
-    margin-bottom: 48px;
-    padding-top: 14.5px;
-    padding-bottom: 14.5px;
-    padding-left: 20px;
-    padding-right: 14.5px;
-  }
-}
-
-.ss-main.my-library-genre-list:focus {
-  box-shadow: 0 0 5px $accent-color;
-}
-
-//?  контейнер з пошуком
-
-.ss-content.my-library-genre-list .ss-search {
-  background: #1c1c1c;
-  border-width: 0.5px;
-  border-style: solid;
-  border-color: rgba(248, 248, 248, 0.2);
-  box-shadow: 0 0 5px $accent-color;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-//?
-.ss-content.my-library-genre-list .ss-search input:focus {
-  box-shadow: 0 0 5px $accent-color;
-}
-
-//? input контейнера з пошуком
-.ss-content.my-library-genre-list .ss-search input {
-  stroke: #f8f8f8;
-  background: #1c1c1c;
-  padding: 10px 15px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.43;
-  border-width: 0.5px;
-  border-style: solid;
-  border-color: rgba(248, 248, 248, 0.2);
-
-  color: #b7b7b7;
-
-  @include desktop {
-    font-size: 16px;
-    line-height: 1.18;
-  }
-}
-
-//? контейнер з опціями
-
-.ss-content.my-library-genre-list .ss-list .ss-option {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.43;
-
-  color: #f8f8f8;
-
-  padding: 12px 20px;
-
-  background: #1c1c1c;
-  /* White */
-
-  border-width: 0.5px;
-  border-style: solid;
-  border-color: rgba(248, 248, 248, 0.2);
-
-  transition: color 300ms $cubic;
-
-  @include desktop {
-    font-size: 16px;
-    line-height: 1.18;
-  }
-}
-
-.ss-content.my-library-genre-list .ss-list .ss-option:focus {
-  box-shadow: 0 0 5px $accent-color;
-}
-
-.ss-content.my-library-genre-list .ss-list .ss-option:hover,
-.ss-content.my-library-genre-list .ss-list .ss-option:focus,
-.ss-content.my-library-genre-list .ss-list .ss-option.ss-highlighted,
-.ss-content.my-library-genre-list
-  .ss-list
-  .ss-option:not(.ss-disabled).ss-selected,
-.ss-content.my-library-genre-list .ss-list .ss-option:hover {
-  background: #1c1c1c;
-  color: $accent-color;
-}
-
-.my-library-genre-list {
-  max-width: 180px;
-  max-height: 40px;
+.select-my-library {
   margin-bottom: 16px;
-
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.14; /* 16px/14 */
-
-  color: #b7b7b7;
-
   @include tablet {
-    max-width: 185px;
-    max-height: 44px;
     margin-bottom: 36px;
   }
-
   @include desktop {
-    max-width: 260px;
-    max-height: 48px;
     margin-bottom: 48px;
   }
+
+  & .select-my-library-selected-option {
+    width: 180px;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 20px;
+    padding-right: 12px;
+    border: 0.5px solid rgba(248, 248, 248, 0.2);
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.18;
+    color: $color-subtitles;
+    color: #b7b7b7;
+    background: #1c1c1c;
+
+    @include tablet {
+      width: 185px;
+
+      padding-top: 14px;
+      padding-bottom: 14px;
+      padding-left: 20px;
+      padding-right: 14px;
+    }
+
+    @include desktop {
+      padding-top: 14.5px;
+      padding-bottom: 14.5px;
+      padding-left: 20px;
+      padding-right: 14.5px;
+    }
+  }
+  & .select-my-library-option-list {
+    height: 236px;
+    overflow: auto;
+  }
+
+  & .select-my-library-option-value {
+    width: 180px;
+    padding: 12px 20px;
+    background: #1c1c1c;
+    border: 0.5px solid rgba(248, 248, 248, 0.2);
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.43;
+    color: #f8f8f8;
+
+    transition: color 300ms $cubic;
+
+    @include tablet {
+      width: 185px;
+    }
+
+    @include desktop {
+      font-size: 16px;
+      line-height: 1.18;
+    }
+
+    &:hover {
+      color: $accent-color;
+    }
+  }
+}
+
+.select-my-library-icon {
+  width: 16px;
+  height: 16px;
+  stroke: $text-color;
+
+  &.icon-down,
+  &.icon-up {
+    position: absolute;
+    right: 20px;
+
+    transition: opacity 300ms ease-in-out, visibility 300ms ease-in-out;
+  }
+
+  &.icon-up {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.select-my-library:hover .select-my-library-icon.icon-down {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.select-my-library:hover .select-my-library-icon.icon-up {
+  opacity: 1;
+  visibility: visible;
 }

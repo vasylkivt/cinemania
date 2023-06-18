@@ -48,7 +48,7 @@
     overflow: auto;
   }
 
-  & .select-my-library-option-value {
+  & .option {
     width: 180px;
     padding: 12px 20px;
     background: #1c1c1c;
@@ -95,12 +95,12 @@
   }
 }
 
-.select-my-library:hover .select-my-library-icon.icon-down {
+.select-my-library-selected-option:hover .select-my-library-icon.icon-down {
   opacity: 0;
   visibility: hidden;
 }
 
-.select-my-library:hover .select-my-library-icon.icon-up {
+.select-my-library-selected-option:hover .select-my-library-icon.icon-up {
   opacity: 1;
   visibility: visible;
 }

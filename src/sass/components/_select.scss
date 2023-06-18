@@ -1,25 +1,25 @@
-.selected-option,
-.option-list,
-.option-list > div {
+.cs-selected-option,
+.cs-option-list,
+.cs-option-list > div {
   position: relative;
   z-index: 11;
-  background-color: rgb(41, 41, 41);
+  background-color: rgb(0, 0, 0);
 }
 
-.selected-option,
-.option-list > div {
+.cs-selected-option,
+.cs-option-list > div {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 10px;
   padding-left: 10px;
 }
 
-.selected-option {
+.cs-selected-option {
   border: 1px solid rgb(141, 141, 141);
   border-radius: 4px;
 }
 
-.option-list {
+.cs-option-list {
   /* pointer-events: none; */
   opacity: 0;
   visibility: hidden;
@@ -32,21 +32,21 @@
     transform 300ms ease-in-out;
 }
 
-.option-list > div {
+.cs-option-list > div {
   border: 1px solid rgb(141, 141, 141);
 }
 
-.option-list > div:last-child {
+.cs-option-list > div:last-child {
   border-radius: 0px 0px 4px 4px;
 }
 
-.select-active .option-list {
+.cs-select-active .cs-option-list {
   opacity: 1;
   visibility: visible;
 
   transform: scaleY(1);
 }
 
-.select-active .selected-option {
+.cs-select-active .cs-selected-option {
   border-radius: 4px 4px 0px 0px;
 }

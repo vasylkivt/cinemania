@@ -1,19 +1,19 @@
 export class SelectService {
-  constructor(select, markupString = null) {
+  constructor(select, optionData = null) {
     this.select = document.querySelector(select);
 
     this.selectedValue = this.select.firstElementChild;
-
     this.optionList = this.select.lastElementChild;
     this.optionListFirstElementChild = this.optionList.firstElementChild;
-    this.markupString = markupString;
+    this.optionData = optionData;
     this.optionListValue = null;
   }
 
   addEventListenerSelect() {
-    this.selectedValue.classList.add('selected-option');
-    this.optionList.classList.add('option-list');
-    this.select.classList.add('select');
+    this.select.classList.add('cs-select');
+    this.selectedValue.classList.add('cs-selected-option');
+    this.optionList.classList.add('cs-option-list');
+    this.optionListFirstElementChild.classList.add('cs-option');
 
     this.selectedValue.addEventListener(
       'mouseenter',
@@ -31,26 +31,34 @@ export class SelectService {
       'mouseleave',
       this.onSelectLostHover.bind(this)
     );
-    if (this.markupString) {
-      this.optionList.insertAdjacentHTML('beforeend', this.markupString);
+    if (this.optionData) {
+      this.optionList.insertAdjacentHTML(
+        'beforeend',
+        this.optionData
+          .map(
+            ({ value, text }) =>
+              `<div class="cs-option" data-value="${value}" class="">${text}</div>`
+          )
+          .join('')
+      );
     }
   }
 
   onSelectHover(e) {
-    this.select.classList.add('select-active');
+    this.select.classList.add('cs-select-active');
 
     this.optionList.addEventListener('click', this.onOptionClick.bind(this));
   }
 
   onSelectLostHover(e) {
-    this.select.classList.remove('select-active');
+    this.select.classList.remove('cs-select-active');
     this.optionList.removeEventListener('click', this.onOptionClick.bind(this));
   }
 
   onOptionClick(e) {
     this.optionListValue = e.target.textContent;
     this.selectedValue.firstChild.textContent = this.optionListValue;
-    this.select.classList.remove('select-active');
+    this.select.classList.remove('cs-select-active');
 
     this.optionList.removeEventListener('click', this.onOptionClick);
   }
@@ -62,15 +70,17 @@ export class SelectService {
 // selectService.addEventListenerSelect();
 
 //? html
-// <div class="Селектор">
-//   <div>
-//     All Genres
-//     [svg-icon]
-//   </div >
-//     <ul>
-//       <li>All Genres</li>
-//     </ul>
-// </div>
+{
+  /* <div class="Селектор">
+  <div>
+    All Genres
+    [svg-icon]
+  </div >
+    <div>
+      <div>All Genres</div>
+    </div>
+</div> */
+}
 
 //? css
 // .selected-option,

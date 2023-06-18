@@ -81,11 +81,9 @@ function renderContentBasedOnConditions() {
 }
 
 function createSelectOption(options) {
-  return options
-    .map(({ id, name }) => {
-      return `<div  data-id-genre="${id}" class="select-my-library-option-value">${name}</div> `;
-    })
-    .join('');
+  return options.map(({ id, name }) => {
+    return { value: id, text: name };
+  });
 }
 
 function renderGenreList(e) {

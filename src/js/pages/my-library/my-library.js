@@ -7,6 +7,9 @@ import { Loader } from '../../loader';
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 
+//!===
+import { SelectService } from '../../components/select';
+
 const PER_PAGE = 6;
 
 const loader = new Loader();
@@ -26,7 +29,7 @@ document.addEventListener('click', function (e) {
   if (e.target.dataset.action === 'add-remove-to-my-library') {
     const dataStorage = Storage.load(STORAGE_KEY.myLibraryMoviesList);
     if (dataStorage.length === 0) {
-      refs.genreList.removeEventListener('change', onSelectGenreListChange);
+      // refs.genreList.removeEventListener('change', onSelectGenreListChange);
       refs.myLibrarySection.classList.add(
         'my-library-content-text-message-section'
       );
@@ -39,7 +42,7 @@ document.addEventListener('click', function (e) {
 
 function renderContentBasedOnConditions() {
   if (dataStorage?.length === 0) {
-    refs.genreList.removeEventListener('change', onSelectGenreListChange);
+    refs.genreList.removeEventListener('click', renderGenreList);
     refs.myLibrarySection.classList.add(
       'my-library-content-text-message-section'
     );
@@ -47,32 +50,29 @@ function renderContentBasedOnConditions() {
   } else if (dataStorage) {
     //? Отримую унікальні ID жанрів фільмів, які є у localStorage і за допомогою функції createSelectOptionMarkup отримую розмітку з жанром, і вставляю у select
     2;
-    dataStorage
+    const allGenres = dataStorage
       .reduce((acc, el) => [...acc, ...el.genres], [])
       .filter(
         (genre, index, self) =>
           index ===
           self.findIndex(g => g.id === genre.id && g.name === genre.name)
-      )
-      .forEach(el =>
-        refs.genreList.insertAdjacentHTML(
-          'beforeend',
-          createSelectOptionMarkup(el)
-        )
       );
 
-    new SlimSelect({
-      select: '#my-library-genre-list',
-      settings: {
-        // showSearch: false, //? Приберає поле пошуку
-        searchText: 'No genre',
-      },
-    });
+    const markupString = createSelectOption(allGenres);
 
-    refs.genreList.addEventListener('change', onSelectGenreListChange);
+    const selectService = new SelectService(
+      '.js-select-my-library-genre-list',
+      markupString
+    );
+    selectService.addEventListenerSelect();
+
+    document
+      .querySelector('.select-my-library-option-list')
+      .addEventListener('click', renderGenreList);
+
     renderLibraryCards(dataStorage);
   } else {
-    refs.genreList.removeEventListener('change', onSelectGenreListChange);
+    refs.genreList.removeEventListener('click', renderGenreList);
     refs.myLibrarySection.classList.add(
       'my-library-content-text-message-section'
     );
@@ -80,22 +80,27 @@ function renderContentBasedOnConditions() {
   }
 }
 
-function createSelectOptionMarkup({ id, name }) {
-  return ` <option value="${id}">${name}</option>`;
+function createSelectOption(options) {
+  return options.map(({ id, name }) => {
+    return { value: id, text: name };
+  });
 }
 
-function onSelectGenreListChange(e) {
-  page = 0;
-  correctGenre = Number(e.currentTarget.value);
+function renderGenreList(e) {
+  correctGenre = e.target.textContent;
 
-  if (!correctGenre) {
-    correctGenre = 'All';
+  page = 0;
+
+  if (correctGenre === 'All Genres') {
+    correctGenre = 'All Genres';
     renderLibraryCards(dataStorage);
     return;
   }
+
   correctGenreMovieList = dataStorage.filter(el => {
-    return el.genres.some(genre => genre.id === correctGenre);
+    return el.genres.some(genre => genre.name === correctGenre);
   });
+
   renderLibraryCards(correctGenreMovieList);
 }
 
@@ -122,7 +127,7 @@ function onloadMoreButtonClick() {
   startIndex += PER_PAGE;
   endIndex += PER_PAGE;
 
-  if (correctGenre === 'All') {
+  if (correctGenre === 'All Genres') {
     localStoragePagination(startIndex, endIndex, dataStorage);
   } else {
     localStoragePagination(startIndex, endIndex, correctGenreMovieList);

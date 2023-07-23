@@ -4,10 +4,6 @@ import { refs } from './refs';
 import { createMarkupFilmsCards } from '../../components/createMarkupFilmCard';
 import { markupContentTextMessage } from './markupContentTextMessage';
 import { Loader } from '../../loader';
-import SlimSelect from 'slim-select';
-import 'slim-select/dist/slimselect.css';
-
-//!===
 import { SelectService } from '../../components/select';
 
 const PER_PAGE = 6;

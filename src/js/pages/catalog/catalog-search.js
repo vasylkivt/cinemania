@@ -1,15 +1,11 @@
 import ApiMovie from '../../api/themoviedbAPI/fetch-movie';
 import { refs } from './catalog-refs';
-
+import { SelectService } from '../../components/select';
 import { pagination, updateBtnNames } from './pagination';
 import { createMarkupFilmsCards } from '../../components/createMarkupFilmCard';
-import SlimSelect from 'slim-select';
-import 'slim-select/dist/slimselect.css';
 import { Loader } from '../../loader';
 
-// Ініціалізація API-класу для отримання фільмів
 const apiMovie = new ApiMovie();
-
 const loader = new Loader();
 
 const {
@@ -21,6 +17,13 @@ const {
   jsPagination,
   mobileInput,
 } = refs;
+
+const selectService = new SelectService(
+  '.catalog-select-years',
+  createYearList()
+);
+//
+selectService.addEventListenerSelect();
 
 let currentYear = 'Year';
 let page;
@@ -266,6 +269,8 @@ function createYearList() {
 
   return yearList;
 }
+
+console.log(createYearList());
 
 // Отримання списку років
 function getYears() {

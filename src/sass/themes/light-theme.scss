@@ -2,17 +2,26 @@
 
 body,
 .header {
-  transition: background-color $delay $cubic;
+  transition: background-color $delay-change-theme $cubic;
 }
 
-.button-accent {
+.logo-text {
+  // transition: background-color $delay $cubic;
 }
 
 //// theme styles
-body.light-theme {
+.light-theme {
   background-color: $background-color-light;
 
   & .header {
     background-color: $background-color-light;
+  }
+
+  & .logo-text {
+    color: $text-color-dark;
+  }
+
+  & .header-nav-link {
+    color: $grey-white-theme;
   }
 }

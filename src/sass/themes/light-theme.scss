@@ -5,8 +5,8 @@ body,
   transition: background-color $delay-change-theme $cubic;
 }
 
-.logo-text {
-  // transition: background-color $delay $cubic;
+.header-mobile-menu-button {
+  transition: color $delay-change-theme $cubic;
 }
 
 //// theme styles
@@ -22,6 +22,10 @@ body,
   }
 
   & .header-nav-link {
+    color: $grey-white-theme;
+  }
+
+  & .header-mobile-menu-button {
     color: $grey-white-theme;
   }
 }

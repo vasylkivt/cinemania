@@ -1,6 +1,9 @@
 .hero-section {
   padding-top: 40px;
   padding-bottom: 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+
   @include tablet {
     padding-top: 62px;
     padding-bottom: 62px;

@@ -1,31 +1,27 @@
 {
-  "name": "project-js-web-anonymous",
+  "name": "cinemania",
   "version": "2.0.0",
-  "description": "Cinemania1",
-  "homepage": "https://YanLozovskyi.github.io/project-js-web-anonymous",
+  "description": "Cinemania",
+  "homepage": "https://vasylkivt.github.io/cinemania",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /project-js-web-anonymous/"
+    "build": "parcel build src/*.html --public-url /cinemania/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YanLozovskyi/project-js-web-anonymous.git"
+    "url": "git+https://github.com/vasylkivt/cinemania.git"
   },
   "keywords": [],
   "author": "Yan Lozovskyi <yanlozovskiy@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/YanLozovskyi/project-js-web-anonymous/issues"
+    "url": "https://github.com/vasylkivt/cinemania/issues"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
     "axios": "^1.4.0",
     "basiclightbox": "^5.0.4",
-    "modern-normalize": "^1.1.0",
-    "simplelightbox": "^2.14.1",
-    "slim-select": "^2.5.0",
-    "swiper": "^9.4.1",
-    "tui-pagination": "^3.4.1"
+    "modern-normalize": "^1.1.0"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.6.0",

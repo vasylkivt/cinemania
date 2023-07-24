@@ -1,51 +1,50 @@
 // utils
 
-@import './utils/modern-normalize';
 @import './utils/variables';
-@import './utils/visually-hidden';
 @import './utils/mixins';
-@import './utils/lightTheme';
+// @import './utils/lightTheme';
 
 // base
+@import './base/modern-normalize';
 @import './base/reset';
 @import './base/fonts';
-@import './base/common';
 @import './base/container';
-@import './base/cursor';
 
 // components
-@import './components/buttons.scss';
-@import './components/scrollbar';
-@import './components/loader';
-@import './components/scroll-up';
-//
-@import './components/select';
+@import './components/visually-hidden';
+@import './components/button.scss';
+@import './components/toggle-switch.scss';
+// @import './components/scrollbar';
+// @import './components/loader';
+// @import './components/scroll-up';
+// //
+// @import './components/select';
 
-// layout
+// // layout
 
-// pages
+// // pages
 
-// home
+// // home
 
 @import './layout/header';
-@import './layout/hero';
-@import './layout/upcoming-this-month';
-@import './layout/weekly-trends';
-@import './layout/footer';
+// @import './layout/hero';
+// @import './layout/upcoming-this-month';
+// @import './layout/weekly-trends';
+// @import './layout/footer';
 
-// catalog
+// // catalog
 
-@import './layout/pages/catalog/hero';
-@import './layout/pages/catalog/catalog-gallery';
-@import './layout/pages/catalog/catalog-gallery-select';
+// @import './layout/pages/catalog/hero';
+// @import './layout/pages/catalog/catalog-gallery';
+// @import './layout/pages/catalog/catalog-gallery-select';
 
-// my-library
+// // my-library
 
-@import './layout/pages/my-library/hero';
-@import './layout/pages/my-library/my-library';
-@import './layout/pages/my-library/content-text-message';
-@import './layout/pages/my-library/select-genres';
+// @import './layout/pages/my-library/hero';
+// @import './layout/pages/my-library/my-library';
+// @import './layout/pages/my-library/content-text-message';
+// @import './layout/pages/my-library/select-genres';
 
-// modal-windows
+// // modal-windows
 
-@import './layout/modal-windows/modal-popup';
+// @import './layout/modal-windows/modal-popup';

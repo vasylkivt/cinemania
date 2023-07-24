@@ -1,0 +1,78 @@
+.toggle {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-input {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+}
+
+.toggle-track {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+
+  width: 44px;
+  height: 18px;
+
+  border-radius: 15px;
+  background: linear-gradient(145deg, #ffc226 0%, #f84119 100%);
+  cursor: pointer;
+}
+
+.toggle-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: 300ms;
+
+  & svg {
+    width: 14px;
+    height: 14px;
+    fill: #f87719;
+  }
+}
+
+.toggle-input {
+  outline: none;
+}
+
+.toggle-input:checked + .toggle-track .toggle-indicator {
+  transform: translateX(26px) rotate(180deg);
+}
+
+.icon-toggle-dark-theme {
+  opacity: 0;
+  visibility: hidden;
+  transition: 300ms;
+}
+
+.toggle-input:checked + .toggle-track .icon-toggle-dark-theme {
+  opacity: 1;
+  visibility: visible;
+}
+
+.icon-toggle-light-theme {
+  opacity: 1;
+  visibility: visible;
+  transition: 300ms;
+}
+
+.toggle-input:checked + .toggle-track .icon-toggle-light-theme {
+  opacity: 0;
+  visibility: hidden;
+}

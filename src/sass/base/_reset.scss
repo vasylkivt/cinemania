@@ -1,3 +1,19 @@
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: $text-color-light;
+  background-color: $background-color-dark;
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
 h1,
 h2,
 h3,
@@ -9,9 +25,10 @@ p {
   margin-bottom: 0;
 }
 
-ul {
+ul,
+ol {
   margin: 0;
-  padding: 0;
+  padding-left: 0;
   list-style: none;
 }
 
@@ -21,6 +38,7 @@ a {
 }
 
 button {
+  padding: 0;
   cursor: pointer;
 }
 
@@ -29,7 +47,7 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-address {
-  font-style: normal;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }

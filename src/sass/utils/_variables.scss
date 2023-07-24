@@ -10,6 +10,7 @@ $accent-color: #f87719;
 
 $title-color: #ffffff;
 $sub-title-color: #b7b7b7;
+$grey-white-theme: #595959;
 
 $text-color-dark: #282828;
 $text-color-light: #f8f8f8;
@@ -27,4 +28,5 @@ $linear-gradient-second: linear-gradient(
 $shadow: 1px 1px 14px 1px rgba(1, 1, 1, 0.25);
 //cubic//
 $delay: 250ms;
+$delay-change-theme: 1000ms;
 $cubic: cubic-bezier(0.4, 0, 0.2, 1);

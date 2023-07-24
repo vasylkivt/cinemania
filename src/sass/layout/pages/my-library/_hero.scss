@@ -1,18 +1,9 @@
-/*
-
-@include tablet {
-    
-  }
-
-  @include desktop {
-   
-  }
-
-  */
-
 .my-library-hero {
   padding-top: 40px;
   padding-bottom: 144px;
+  margin: 0 auto;
+  max-width: 1440px;
+
   @include tablet {
     padding-top: 62px;
     padding-bottom: 118px;

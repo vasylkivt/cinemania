@@ -1,8 +1,9 @@
 // utils
-
 @import './utils/variables';
 @import './utils/mixins';
-// @import './utils/lightTheme';
+
+//theme
+@import './themes/light-theme';
 
 // base
 @import './base/modern-normalize';
@@ -14,6 +15,9 @@
 @import './components/visually-hidden';
 @import './components/button.scss';
 @import './components/toggle-switch.scss';
+@import './components/hero-content/hero-title';
+@import './components/hero-content/hero-section';
+@import './components/hero-content/hero-text';
 // @import './components/scrollbar';
 // @import './components/loader';
 // @import './components/scroll-up';
@@ -41,7 +45,7 @@
 
 // // my-library
 
-// @import './layout/pages/my-library/hero';
+@import './layout/pages/my-library/hero';
 // @import './layout/pages/my-library/my-library';
 // @import './layout/pages/my-library/content-text-message';
 // @import './layout/pages/my-library/select-genres';

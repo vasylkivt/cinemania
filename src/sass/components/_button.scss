@@ -12,7 +12,7 @@
   line-height: 1.16;
 
   transition: box-shadow $delay $cubic, color $delay $cubic,
-    background-color $delay $cubic;
+    background-color $delay $cubic, transform $delay $cubic;
 
   @include tablet {
     font-size: 14px;

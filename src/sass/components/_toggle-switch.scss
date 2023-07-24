@@ -40,6 +40,8 @@
   background: #ffffff;
   transition: 300ms;
 
+  transform: translateX(26px) rotate(0deg);
+
   & svg {
     width: 14px;
     height: 14px;
@@ -52,27 +54,27 @@
 }
 
 .toggle-input:checked + .toggle-track .toggle-indicator {
-  transform: translateX(26px) rotate(180deg);
+  transform: translateX(0) rotate(180deg);
 }
 
 .icon-toggle-dark-theme {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   transition: 300ms;
 }
 
 .toggle-input:checked + .toggle-track .icon-toggle-dark-theme {
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .icon-toggle-light-theme {
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
   transition: 300ms;
 }
 
 .toggle-input:checked + .toggle-track .icon-toggle-light-theme {
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
 }

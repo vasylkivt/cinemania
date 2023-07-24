@@ -1,6 +1,7 @@
 //// transition
 
-body {
+body,
+.header {
   transition: background-color $delay $cubic;
 }
 
@@ -11,6 +12,7 @@ body {
 body.light-theme {
   background-color: $background-color-light;
 
-  & .button-accent {
+  & .header {
+    background-color: $background-color-light;
   }
 }

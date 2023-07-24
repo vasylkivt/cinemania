@@ -1,0 +1,16 @@
+//// transition
+
+body {
+  transition: background-color $delay $cubic;
+}
+
+.button-accent {
+}
+
+//// theme styles
+body.light-theme {
+  background-color: $background-color-light;
+
+  & .button-accent {
+  }
+}

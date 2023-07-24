@@ -1,0 +1,74 @@
+.hero-section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+  @include tablet {
+    padding-top: 62px;
+    padding-bottom: 62px;
+  }
+
+  @include desktop {
+    padding-top: 169px;
+    padding-bottom: 169px;
+  }
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-image: linear-gradient(
+      86.77deg,
+      #111111 10.38%,
+      rgba(17, 17, 17, 0) 45.61%
+    ),
+    url('/src/images/pages/home/hero/hero-mob-1-1x-min.jpg');
+
+  @media screen and (max-width: 767px) and (min-device-pixel-ratio: 2),
+    screen and (max-width: 767px) and (min-resolution: 192dpi),
+    screen and (max-width: 767px) and (min-resolution: 2dppx) {
+    background-image: linear-gradient(
+        86.77deg,
+        #111111 10.38%,
+        rgba(17, 17, 17, 0) 45.61%
+      ),
+      url('/src/images/pages/home/hero/hero-mob-1-2x-min.jpg');
+  }
+
+  @media screen and (min-width: 768px) {
+    background-image: linear-gradient(
+        82.55deg,
+        #111111 10%,
+        rgba(17, 17, 17, 0) 45.95%
+      ),
+      url('/src/images/pages/home/hero/hero-tab-1-1x-min.jpg');
+  }
+  @media screen and (min-width: 768px) and (min-device-pixel-ratio: 2),
+    screen and (min-width: 768px) and (min-resolution: 192dpi),
+    screen and (min-width: 768px) and (min-resolution: 2dppx) {
+    background-image: linear-gradient(
+        82.55deg,
+        #111111 10%,
+        rgba(17, 17, 17, 0) 45.95%
+      ),
+      url('/src/images/pages/home/hero/hero-tab-1-2x-min.jpg');
+  }
+
+  @media (min-width: 1280px) {
+    background-image: linear-gradient(
+        83.16deg,
+        #111111 15%,
+        rgba(17, 17, 17, 0) 45%
+      ),
+      url('/src/images/pages/home/hero/hero-des-1-1x-min.jpg');
+  }
+
+  @media screen and (min-width: 1280px) and (min-device-pixel-ratio: 2),
+    screen and (min-width: 1280px) and (min-resolution: 192dpi),
+    screen and (min-width: 1280px) and (min-resolution: 2dppx) {
+    background-image: linear-gradient(
+        83.16deg,
+        #111111 15%,
+        rgba(17, 17, 17, 0) 45%
+      ),
+      url('/src/images/pages/home/hero/hero-des-1-2x-min.jpg');
+  }
+}

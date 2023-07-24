@@ -8,17 +8,28 @@
       <nav class="header-nav">
         <ul class="header-nav-list">
           <li class="header-nav-item">
-            <a href="./index.html" class="header-nav-link">Home</a>
+            <a href="./index.html" class="js-header-nav-link header-nav-link"
+              >Home</a
+            >
           </li>
           <li class="header-nav-item">
-            <a href="./catalog.html" class="header-nav-link">Catalog</a>
+            <a href="./catalog.html" class="js-header-nav-link header-nav-link"
+              >Catalog</a
+            >
           </li>
           <li class="header-nav-item">
-            <a href="./my-library.html" class="header-nav-link">Library</a>
+            <a
+              href="./my-library.html"
+              class="js-header-nav-link header-nav-link"
+              >Library</a
+            >
           </li>
         </ul>
       </nav>
+      <button type="button" class="header-mobile-menu-button">Menu</button>
+      <!--// toggle switch checkbox -->
       <include src="../src/partials/elements/toggle-switch.html"></include>
     </div>
   </div>
+  <include src="../src/partials/mobile-menu.html"></include>
 </header>

@@ -1,5 +1,6 @@
 import { TMDB_API } from '../api/themoviedbAPI';
 import comingSoonImg from '../../images/default-image-for-movie.webp';
+import { ratingStarsMarkup } from './rating-stars';
 
 let genresList = [];
 
@@ -15,7 +16,6 @@ export const createMarkupMovieList = async movieList => {
       ({
         id,
         poster_path,
-
         genre_ids,
         original_title,
         release_date,
@@ -42,9 +42,9 @@ export const createMarkupMovieList = async movieList => {
               <p class="movie-card-text">
                 ${genre} | ${release_date.slice(0, 4)}
               </p>
-              <span class="movie-card-rating">
-                *********
-              </span>
+              <div class="movie-card-rating">
+              ${ratingStarsMarkup(vote_average * 10)}
+              </div>
           </div>
         </li>
        `;

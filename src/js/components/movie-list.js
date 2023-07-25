@@ -70,12 +70,9 @@ function getImg(poster, title) {
   }
 
   return `
-    srcset="
-                https://image.tmdb.org/t/p/w500/${poster} 500w,
-                https://image.tmdb.org/t/p/w300/${poster} 342w,
-                https://image.tmdb.org/t/p/w185/${poster} 185w"
-        src="https://image.tmdb.org/t/p/w500/${poster}"
-
-        " sizes=" (min-width: 768px) 500px, (min-width: 480px) 342px, (min-width: 320px) 185px, 100vw"   
+    srcset="https://image.tmdb.org/t/p/w500/${poster} 500w,
+            https://image.tmdb.org/t/p/w300/${poster} 342w,"
+       src="https://image.tmdb.org/t/p/w500/${poster}"
+     sizes="(min-width: 768px) 500px, (min-width: 480px) 342px, (min-width: 320px) 185px, 100vw"   
      alt='${title}'`;
 }

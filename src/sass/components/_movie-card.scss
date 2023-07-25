@@ -47,20 +47,29 @@
 
   display: grid;
   grid-gap: 6px 10px;
-  grid-template-columns: 1fr 86px;
-
+  grid-template-columns: 1fr 88px;
+  grid-template-rows: 1fr 14px;
   grid-template-areas:
     'title title'
     'text rating';
 
   padding: 12px;
+
+  @include tablet {
+    grid-template-columns: 1fr 64px;
+    grid-template-rows: 1fr 10px;
+  }
+
   @include desktop {
+    grid-template-columns: 1fr 114px;
+    grid-template-rows: 1fr 18px;
     padding: 20px;
   }
 }
 
 .movie-card-title {
   grid-area: title;
+
   font-weight: 500;
   font-size: 12px;
   line-height: 1.66;
@@ -94,31 +103,4 @@
 
 .movie-card-rating {
   grid-area: rating;
-  width: 86px;
-  display: block;
-  height: 14px;
-  background-color: $accent-color;
-  @include tablet {
-    width: 66px;
-    height: 10px;
-  }
-  @include desktop {
-    width: 106px;
-    height: 18px;
-  }
-}
-
-.card-list .card-list-item:not(:first-child) {
-  @media (max-width: 767px) {
-    position: absolute;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    white-space: nowrap;
-    clip-path: inset(100%);
-  }
 }

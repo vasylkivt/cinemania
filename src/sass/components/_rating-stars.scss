@@ -1,0 +1,21 @@
+.rating-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.star-empty {
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/icon/stats-rating/star-empty.svg');
+  background-size: contain;
+}
+
+.star-full {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/icon/stats-rating/star-full.svg');
+  background-size: contain;
+}

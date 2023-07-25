@@ -5,7 +5,8 @@ body,
   transition: background-color $delay-change-theme $cubic;
 }
 
-.header-mobile-menu-button {
+.header-mobile-menu-button,
+.home-weekly-trends-title {
   transition: color $delay-change-theme $cubic;
 }
 
@@ -27,5 +28,9 @@ body,
 
   & .header-mobile-menu-button {
     color: $grey-white-theme;
+  }
+
+  & .home-weekly-trends-title {
+    color: $background-color-dark;
   }
 }

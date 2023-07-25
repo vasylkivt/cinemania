@@ -1,0 +1,154 @@
+.home-upcoming-this-month-title {
+  margin-bottom: 24px;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.17;
+  text-transform: uppercase;
+  color: $title-color;
+
+  @include tablet {
+    font-size: 24px;
+  }
+
+  @include desktop {
+    margin-bottom: 28px;
+    font-size: 28px;
+  }
+}
+
+.home-upcoming-this-month-wrapper {
+  display: grid;
+  row-gap: 24px;
+  @include tablet {
+    row-gap: 32px;
+  }
+  @include desktop {
+    grid-template-columns: 804px 1fr;
+    column-gap: 16px;
+  }
+}
+
+.home-upcoming-this-month-img {
+  width: 280px;
+  border-radius: 5px;
+  object-fit: cover;
+  @include tablet {
+    width: 704px;
+  }
+
+  @include desktop {
+    width: 805px;
+  }
+}
+
+.home-upcoming-movie-details-wrapper {
+  display: grid;
+  row-gap: 12px;
+  align-items: start;
+  grid-template-columns: 50% 50%;
+
+  margin-bottom: 20px;
+
+  @include tablet {
+    grid-template-columns: 20% 30% 20% 30%;
+  }
+
+  @include desktop {
+    grid-template-columns: 150px 1fr;
+  }
+}
+
+.home-upcoming-movie-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.16;
+  color: $title-color;
+  margin-bottom: 20px;
+
+  @include tablet {
+    font-size: 28px;
+  }
+
+  @include desktop {
+    font-size: 32px;
+
+    margin-bottom: 28px;
+  }
+}
+
+.home-upcoming-movie-details-names {
+  color: $sub-title-color;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.18;
+  display: flex;
+  align-items: center;
+}
+
+.home-upcoming-movie-detail-date,
+.home-upcoming-movie-detail-popularity,
+.home-upcoming-movie-detail-genre {
+  font-size: 16px;
+  font-weight: 500;
+}
+.home-upcoming-movie-detail-date {
+  color: $accent-color;
+  text-transform: uppercase;
+}
+
+.home-upcoming-movie-detail-vote > span {
+  display: inline-block;
+  min-width: 36px;
+  padding: 1px 4px;
+  background-color: $background-color-light;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 14px;
+  color: $background-color-dark;
+  font-weight: 500;
+
+  text-transform: uppercase;
+}
+.home-upcoming-movie-desc-title {
+  margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.18;
+  text-transform: uppercase;
+  color: $sub-title-color;
+}
+.home-upcoming-movie-desc {
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.4;
+  color: $text-color-light;
+}
+
+// .info-item-two {
+//   color: $light-color;
+//   font-weight: 500;
+//   font-size: 16px;
+//   line-height: 1.18;
+// }
+
+// .info-item-fourth {
+//   background: $light-color;
+//   border-radius: 5px;
+//   padding: 1px 8px;
+//   max-width: 36px;
+//   max-height: 18px;
+// }
+
+// .vote-text {
+//   font-size: 14px;
+//   line-height: 1.14;
+//   text-transform: uppercase;
+//   color: $dark-color;
+// }
+
+// .info-item-second {
+//   color: $accent-color;
+//   text-transform: uppercase;
+// }

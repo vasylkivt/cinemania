@@ -1,0 +1,52 @@
+.home-weekly-trends {
+  padding-top: 40px;
+  padding-bottom: 32px;
+  @include tablet {
+    padding-top: 52px;
+    padding-bottom: 44px;
+  }
+  @include desktop {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+}
+
+.home-weekly-trends-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  @include desktop {
+    margin-bottom: 28px;
+  }
+}
+
+.home-weekly-trends-title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.8;
+  text-transform: uppercase;
+  color: $white;
+
+  @include tablet {
+    font-size: 24px;
+  }
+
+  @include desktop {
+    font-size: 28px;
+  }
+}
+
+.home-weekly-trends-link {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.8;
+  color: $accent-color;
+
+  @include tablet {
+    font-size: 24px;
+  }
+  @include desktop {
+    font-size: 28px;
+  }
+}

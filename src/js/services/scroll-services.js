@@ -1,18 +1,18 @@
 /**
  * Блокує прокручування сторінки.
  */
-function blockScroll() {
+const blockScroll = () => {
   document.body.style.overflow = 'hidden';
   document.body.style.paddingRight = getWidthScrollbar() + 'px';
-}
+};
 
 /**
  * Відновлює прокручування сторінки.
  */
-function restoreScroll() {
+const restoreScroll = () => {
   document.body.style.overflow = '';
   document.body.style.paddingRight = '';
-}
+};
 
 /**
  * Отримує ширину полоси прокрутки.

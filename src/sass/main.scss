@@ -15,11 +15,15 @@
 @import './components/visually-hidden';
 @import './components/button.scss';
 @import './components/toggle-switch.scss';
+@import './components/loader';
+
 @import './components/hero-content/hero-title';
 @import './components/hero-content/hero-section';
 @import './components/hero-content/hero-text';
+
+@import './components/movie-card';
+@import './components/movie-list';
 // @import './components/scrollbar';
-// @import './components/loader';
 // @import './components/scroll-up';
 // //
 // @import './components/select';
@@ -33,8 +37,8 @@
 @import './layout/header';
 @import './layout/mobile-menu';
 // @import './layout/hero';
+@import './layout/pages/home/weekly-trends';
 // @import './layout/upcoming-this-month';
-// @import './layout/weekly-trends';
 // @import './layout/footer';
 
 // // catalog

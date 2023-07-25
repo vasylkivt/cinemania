@@ -1,0 +1,15 @@
+.movie-list {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 16px;
+
+  @include tablet {
+    grid-template-columns: repeat(auto-fill, minmax(224px, 1fr));
+    grid-gap: 28px 16px;
+  }
+  @include desktop {
+    grid-template-columns: repeat(auto-fill, minmax(394px, 1fr));
+    grid-gap: 32px 16px;
+  }
+}

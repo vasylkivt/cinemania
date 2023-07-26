@@ -1,18 +1,20 @@
 import comingSoonImg from '../../images/default-image-for-movie.webp';
 import { ratingStarsMarkup } from './rating-stars';
 
-export const createMarkupMovieList = (movieList, genresList) => {
-  return movieList
-    .map(
-      ({
-        id,
-        poster_path,
-        genre_ids,
-        original_title,
-        release_date,
-        vote_average,
-      }) => {
-        return `
+export const createMarkupMovieList = (
+  movieList,
+  genresList
+) => `<ul class="movie-list">
+${movieList
+  .map(
+    ({
+      id,
+      poster_path,
+      genre_ids,
+      original_title,
+      release_date,
+      vote_average,
+    }) => `
         <li data-movie_id="${id}" class="movie-card">
           <img
           ${getImg(poster_path, original_title)}
@@ -30,11 +32,41 @@ export const createMarkupMovieList = (movieList, genresList) => {
               </div>
           </div>
         </li>
-       `;
-      }
-    )
-    .join('');
-};
+       `
+  )
+  .join('')}
+
+</ul>`;
+// movieList
+//   .map(
+//     ({
+//       id,
+//       poster_path,
+//       genre_ids,
+//       original_title,
+//       release_date,
+//       vote_average,
+//     }) => `
+//         <li data-movie_id="${id}" class="movie-card">
+//           <img
+//           ${getImg(poster_path, original_title)}
+//           class="movie-card-img"
+//           width="280"
+//           height="406"
+//           />
+//           <div class="movie-card-wrapper">
+//               <h2 class="movie-card-title">${original_title}</h2>
+//               <p class="movie-card-text">
+//                 ${getGenre(genre_ids, genresList)} | ${release_date.slice(0, 4)}
+//               </p>
+//               <div class="movie-card-rating">
+//               ${ratingStarsMarkup(vote_average * 10)}
+//               </div>
+//           </div>
+//         </li>
+//        `
+//   )
+//   .join('');
 
 function getGenre(genreIds, genresList) {
   let genre = '';

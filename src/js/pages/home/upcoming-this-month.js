@@ -14,7 +14,6 @@ async function getNewFilms() {
 
     const addRemoveBtn = document.querySelector('.js-add-remove-btn');
     const serviceAddRemoveBtn = new ServiceAddRemoveBtn(addRemoveBtn, movie);
-
     serviceAddRemoveBtn.setButtonName();
   } catch (error) {
     console.log(error);

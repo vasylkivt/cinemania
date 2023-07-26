@@ -1,3 +1,16 @@
+.home-weekly-trends-movie-list {
+  & .movie-card {
+    display: none;
+    @include tablet {
+      display: block;
+    }
+  }
+
+  & .movie-card:first-child {
+    display: block;
+  }
+}
+
 .home-weekly-trends {
   padding-top: 40px;
   padding-bottom: 32px;

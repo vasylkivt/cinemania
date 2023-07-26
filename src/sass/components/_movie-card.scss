@@ -1,13 +1,8 @@
 .movie-card {
-  display: none;
   border-radius: 5px;
   position: relative;
   box-shadow: $shadow;
   transition: transform $delay $cubic, box-shadow $delay $cubic;
-
-  @include tablet {
-    display: block;
-  }
 
   &::before {
     content: '';

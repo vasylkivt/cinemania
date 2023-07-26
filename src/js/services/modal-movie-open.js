@@ -10,9 +10,7 @@ try {
 }
 
 function onMovieCardClick(e) {
-  if (e.target.dataset.movie_id) {
-    openMovieModalById(e.target.dataset.movie_id);
-  }
+  if (e.target.dataset.movie_id) openMovieModalById(e.target.dataset.movie_id);
 }
 
 async function openMovieModalById(movieId) {

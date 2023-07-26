@@ -1,3 +1,44 @@
+.modal-movie-card-inner-wrap {
+  position: relative;
+}
+
+.modal-movie-card-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  box-shadow: inset 0 0 2px 5px $accent-color;
+
+  border-radius: 5px;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  transition: box-shadow $delay $cubic, opacity $delay $cubic;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  & svg {
+    fill: $accent-color;
+    width: 100px;
+    height: 100px;
+    opacity: 0.7;
+    border-radius: 50%;
+    transition: box-shadow $delay $cubic, opacity $delay $cubic;
+
+    &:hover {
+      box-shadow: $shadow-hover;
+      opacity: 1;
+    }
+  }
+}
+
 .modal-movie-card-backdrop {
   align-items: flex-start;
   overflow: auto;

@@ -11,7 +11,7 @@ export const markupModalMovieCard = ({
   overview,
 }) => {
   return `
- 
+  
   <div class="modal-movie-card-wrap"> 
   <div>
     <button type="button" class="js-close-modal-btn modal-movie-card-button-close">
@@ -19,13 +19,20 @@ export const markupModalMovieCard = ({
         <use href="${svgCloseIcon}#icon-button-close"></use>
       </svg>
     </button>
-    <img
-      class="modal-movie-card-img"
-      loading="lazy"
-      width="280"
-      height="402"
-      ${getImg(poster_path, original_title)}
-    />
+    <div class="modal-movie-card-inner-wrap">
+    <div class="modal-movie-card-inner">
+      <svg class="js-button-show-trailer modal-movie-card-button-close-icon">
+        <use href="${svgCloseIcon}#icon-play"></use>
+      </svg>
+      </div>
+      <img
+        class="modal-movie-card-img"
+        loading="lazy"
+        width="280"
+        height="402"
+        ${getImg(poster_path, original_title)}
+      />
+    </div>
   </div>
   <div>
     <h3 class="modal-movie-card-title">${original_title}</h3>

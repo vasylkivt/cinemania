@@ -17,5 +17,8 @@
     <symbol id="icon-button-close" viewBox="0 0 32 32">
       <path fill="none"  stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.3333" d="M23 23l-14-14M23 9l-14 14"></path>
     </symbol>
+    <symbol id="icon-play" viewBox="0 0 32 32">
+      <path  d="M32 16c0 8.837-7.163 16-16 16s-16-7.163-16-16c0-8.837 7.163-16 16-16s16 7.163 16 16zM14.080 22.971l8.64-4.988c1.28-0.739 1.28-2.587 0-3.326l-8.64-4.988c-1.28-0.739-2.88 0.185-2.88 1.663v9.977c0 1.478 1.6 2.402 2.88 1.663z"></path>
+    </symbol>
   </defs>
 </svg>

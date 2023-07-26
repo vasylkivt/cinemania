@@ -1,16 +1,7 @@
-import { TMDB_API } from '../api/themoviedbAPI';
 import comingSoonImg from '../../images/default-image-for-movie.webp';
 import { ratingStarsMarkup } from './rating-stars';
 
-let genresList = [];
-
-export const createMarkupMovieList = async movieList => {
-  try {
-    genresList = await TMDB_API.getGenresList();
-  } catch (error) {
-    console.log(error);
-  }
-
+export const createMarkupMovieList = (movieList, genresList) => {
   return movieList
     .map(
       ({
@@ -21,18 +12,10 @@ export const createMarkupMovieList = async movieList => {
         release_date,
         vote_average,
       }) => {
-        const movieSrc = getImg(poster_path, original_title);
-        let genre = '';
-        if (genre_ids?.length === 0) {
-          genre = 'Unknown Genre';
-        } else if (genre_ids) {
-          genre = getGenreName(genre_ids).slice(0, 1).join(' ');
-        }
-
         return `
         <li data-movie_id="${id}" class="movie-card">
           <img
-          ${movieSrc}
+          ${getImg(poster_path, original_title)}
           class="movie-card-img"
           width="280"
           height="406"
@@ -40,7 +23,7 @@ export const createMarkupMovieList = async movieList => {
           <div class="movie-card-wrapper">
               <h2 class="movie-card-title">${original_title}</h2>
               <p class="movie-card-text">
-                ${genre} | ${release_date.slice(0, 4)}
+                ${getGenre(genre_ids, genresList)} | ${release_date.slice(0, 4)}
               </p>
               <div class="movie-card-rating">
               ${ratingStarsMarkup(vote_average * 10)}
@@ -53,7 +36,18 @@ export const createMarkupMovieList = async movieList => {
     .join('');
 };
 
-function getGenreName(ids) {
+function getGenre(genreIds, genresList) {
+  let genre = '';
+  if (genreIds?.length === 0) {
+    genre = 'Unknown Genre';
+  } else if (genreIds) {
+    genre = getGenreName(genreIds, genresList).slice(0, 1).join(' ');
+  }
+
+  return genre;
+}
+
+function getGenreName(ids, genresList) {
   try {
     return ids.map(id => {
       const genre = genresList.find(genre => genre.id === id);
@@ -70,8 +64,10 @@ function getImg(poster, title) {
   }
 
   return `
-    srcset="https://image.tmdb.org/t/p/w500/${poster} 500w,
-            https://image.tmdb.org/t/p/w300/${poster} 342w,"
+    srcset="
+    https://image.tmdb.org/t/p/w300/${poster} 342w,
+    https://image.tmdb.org/t/p/w500/${poster} 500w
+            "
        src="https://image.tmdb.org/t/p/w500/${poster}"
      sizes="(min-width: 768px) 500px, (min-width: 480px) 342px, (min-width: 320px) 185px, 100vw"   
      alt='${title}'`;

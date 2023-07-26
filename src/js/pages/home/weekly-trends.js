@@ -7,11 +7,11 @@ const getTrendMovieOfWeek = async () => {
   try {
     Loader.onShow();
     const response = await TMDB_API.getTrendMovieByParam('week');
-
+    const genresList = await TMDB_API.getGenresList();
     const correctList = response.slice(0, 3);
 
     document.querySelector('.home-weekly-trends-movie-list').innerHTML =
-      await createMarkupMovieList(correctList);
+      createMarkupMovieList(correctList, genresList);
   } catch (error) {
     console.log('Error:', error);
   }

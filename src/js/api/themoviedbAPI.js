@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { randomElementOfArray } from '../helpers/random-element';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const API_KEY = '267e0ef2e56c2254d403c0d4ffe19052';
@@ -16,10 +17,11 @@ const getTrendMovieByParam = async param => {
 
 // Нові фільми
 //! для Upcoming this months рандомний фільм
-const getUpcomingFilms = () => {
-  const { data } = axios.get(`movie/upcoming?api_key=${API_KEY}`);
+const getUpcomingFilms = async () => {
+  const { data } = await axios.get(`movie/upcoming?api_key=${API_KEY}`);
+  const randomMovie = randomElementOfArray(data.results);
 
-  return data.results;
+  return getMovieByMovieId(randomMovie.id);
 };
 
 // Детальна інформація про фільм

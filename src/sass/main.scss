@@ -5,6 +5,7 @@
 //theme
 @import './themes/light-theme';
 
+@import '~node_modules/basiclightbox/dist/basicLightbox.min.css';
 // base
 @import './base/reset';
 @import './base/fonts';
@@ -42,7 +43,7 @@
 // @import './layout/hero';
 @import './layout/pages/home/weekly-trends';
 @import './layout/pages/home/upcoming-this-month';
-// @import './layout/footer';
+@import './layout/footer';
 
 // // catalog
 
@@ -57,6 +58,6 @@
 // @import './layout/pages/my-library/content-text-message';
 // @import './layout/pages/my-library/select-genres';
 
-// // modal-windows
+// modal-windows
 
-// @import './layout/modal-windows/modal-popup';
+@import './layout/modal-movie-card';

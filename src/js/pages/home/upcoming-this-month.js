@@ -48,7 +48,7 @@ function createUpcomingMovieMarkup({
           <p class="home-upcoming-movie-detail-date">${release_date}</p>
           <p class="home-upcoming-movie-details-names">Vote / Votes</p>
           <p class="home-upcoming-movie-detail-vote">
-            <span>${vote_average}</span> / <span>${vote_count}</span>
+            <span>${vote_average.toFixed(1)}</span> / <span>${vote_count}</span>
           </p>
           <p class="home-upcoming-movie-details-names">Popularity</p>
           <p class="home-upcoming-movie-detail-popularity">${popularity}</p>

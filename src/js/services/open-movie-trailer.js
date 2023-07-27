@@ -1,8 +1,9 @@
 import { TMDB_API } from '../api/themoviedbAPI';
+import { markupErrorMessageTrailer } from '../components/error-mesage-trailer';
 
 import { BasicLightbox } from './basic-lightbox';
 
-export const openTrailer = () => {
+export const addEventListenerByOpenTrailer = () => {
   try {
     document
       .querySelector('.js-button-show-trailer')
@@ -23,6 +24,13 @@ async function getTrailerByMovieId(movieId) {
   try {
     const trailers = await TMDB_API.getTrailerByMovieId(movieId);
 
+    if (trailers && trailers.length === 0) {
+      const instance = BasicLightbox.errorMessage(markupErrorMessageTrailer());
+
+      instance.show();
+      return;
+    }
+
     const trailer = trailers.find(
       el => el.type === 'Trailer' || el.name === 'Official Trailer'
     );
@@ -32,5 +40,8 @@ async function getTrailerByMovieId(movieId) {
     instance.show();
   } catch (error) {
     console.log('error:', error);
+    const instance = BasicLightbox.errorMessage(markupErrorMessageTrailer());
+
+    instance.show();
   }
 }

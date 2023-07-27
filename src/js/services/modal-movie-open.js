@@ -1,7 +1,7 @@
 import { TMDB_API } from '../api/themoviedbAPI';
 
 import { BasicLightbox } from './basic-lightbox';
-import { openTrailer } from './open-movie-trailer';
+import { addEventListenerByOpenTrailer } from './open-movie-trailer';
 try {
   document
     .querySelectorAll('.js-open-modal-movie')
@@ -21,7 +21,7 @@ async function openMovieModalById(movieId) {
     const instance = BasicLightbox.openModal(movie);
 
     instance.show();
-    openTrailer();
+    addEventListenerByOpenTrailer();
   } catch (error) {
     console.log('error:', error);
   }

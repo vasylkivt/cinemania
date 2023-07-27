@@ -23,9 +23,6 @@ const openModal = movie =>
       instance.element().querySelector('.js-close-modal-btn').onclick =
         instance.close;
 
-      // instance.element().querySelector('.js-button-show-trailer').onclick =
-      //   showTrailer;
-
       this.handlerEscape = handlerEsc.bind(instance);
       document.addEventListener('keydown', this.handlerEscape);
     },
@@ -36,27 +33,42 @@ const openModal = movie =>
     },
   });
 
-const showTrailer = trailer => {
-  console.log(54);
+const showTrailer = trailer =>
+  basicLightbox.create(
+    `
+       <iframe class="modal-trailer-iframe" src="https://www.youtube.com/embed/${trailer.key}" width="560" height="315" frameborder="0"></iframe>`,
+    {
+      handlerEscape: null,
 
-  // const instance = basicLightbox.create(
-  //   `
-  //      <iframe class="iframe" src="https://www.youtube.com/embed/${trailer.key}" width="560" height="315" frameborder="0"></iframe>`,
-  //   {
-  //     handlerEscape: null,
+      onShow(instance) {
+        this.handlerEscape = handlerEsc.bind(instance);
+        document.addEventListener('keydown', this.handlerEscape);
+      },
+      onClose() {
+        document.removeEventListener('keydown', this.handlerEscape);
+      },
+    }
+  );
 
-  //     onShow() {
-  //       this.handlerEscape = handlerEsc.bind(instance);
-  //       document.addEventListener('keydown', this.handlerEscape);
-  //     },
-  //     onClose() {
-  //       document.removeEventListener('keydown', this.handlerEscape);
-  //     },
-  //   }
-  // );
-};
+const errorMessage = markupError =>
+  basicLightbox.create(markupError, {
+    handlerEscape: null,
+
+    onShow(instance) {
+      instance
+        .element()
+        .querySelector('.js-close-modal-error-message-btn').onclick =
+        instance.close;
+      this.handlerEscape = handlerEsc.bind(instance);
+      document.addEventListener('keydown', this.handlerEscape);
+    },
+    onClose() {
+      document.removeEventListener('keydown', this.handlerEscape);
+    },
+  });
 
 export const BasicLightbox = {
   openModal,
   showTrailer,
+  errorMessage,
 };

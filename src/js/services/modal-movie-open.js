@@ -1,6 +1,7 @@
 import { TMDB_API } from '../api/themoviedbAPI';
 
 import { BasicLightbox } from './basic-lightbox';
+import { addEventListenerByOpenTrailer } from './open-movie-trailer';
 try {
   document
     .querySelectorAll('.js-open-modal-movie')
@@ -10,7 +11,8 @@ try {
 }
 
 function onMovieCardClick(e) {
-  if (e.target.dataset.movie_id) openMovieModalById(e.target.dataset.movie_id);
+  if (e.target.dataset.movie_id_for_modal)
+    openMovieModalById(e.target.dataset.movie_id_for_modal);
 }
 
 async function openMovieModalById(movieId) {
@@ -20,6 +22,7 @@ async function openMovieModalById(movieId) {
     const instance = BasicLightbox.openModal(movie);
 
     instance.show();
+    addEventListenerByOpenTrailer();
   } catch (error) {
     console.log('error:', error);
   }

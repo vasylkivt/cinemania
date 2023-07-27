@@ -21,7 +21,8 @@
     "animate.css": "^4.1.1",
     "axios": "^1.4.0",
     "basiclightbox": "^5.0.4",
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^1.1.0",
+    "swiper": "^10.0.4"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.6.0",

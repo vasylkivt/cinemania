@@ -1,0 +1,75 @@
+.modal-error-message-trailer-wrap {
+  position: relative;
+  padding: 40px 32px;
+  background-color: $background-color-dark;
+  max-width: 280px;
+  height: 290px;
+  border-radius: 16px;
+
+  box-shadow: $shadow-hover;
+
+  background-image: url('../images/modal-window/modal-mobile-min.webp');
+  background-repeat: no-repeat;
+  background-size: 160px;
+  background-position: center bottom 8px;
+
+  @include tablet {
+    background-image: url('../images/modal-window/modal-tablet-min.webp');
+    background-repeat: no-repeat;
+    background-size: 296px;
+    background-position: right 10px bottom 16px;
+    max-width: none;
+    padding-top: 132px;
+    padding-left: 44px;
+    height: 400px;
+    width: 610px;
+  }
+  @include desktop {
+    background-image: url('../images/modal-window/modal-desktop-min.webp');
+    background-repeat: no-repeat;
+    background-size: 363px;
+    background-position: right 2px bottom 2px;
+    padding-top: 150px;
+    padding-left: 50px;
+    padding-bottom: 150px;
+    width: 700px;
+  }
+}
+
+.modal-error-message-trailer-close-btn {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  @include tablet {
+    top: 24px;
+    right: 24px;
+  }
+
+  @include desktop {
+    top: 28px;
+    right: 28px;
+  }
+
+  & svg {
+    stroke: $title-color-light;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.modal-error-message-trailer-text {
+  font-size: 16px;
+  line-height: 1.35;
+  color: $text-color-light;
+
+  @include tablet {
+    line-height: 1.3;
+    font-size: 24px;
+  }
+
+  @include desktop {
+    line-height: 1.4;
+  }
+}

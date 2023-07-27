@@ -4,8 +4,40 @@ import { Loader } from '../../components/loader';
 import { TMDB_API } from '../../api/themoviedbAPI';
 import { addEventListenerByOpenTrailer } from '../../services/open-movie-trailer';
 
-import Swiper from 'swiper';
-import '~/node_modules/swiper/swiper-bundle.min.css';
+// import '~/node_modules/swiper/swiper-bundle.min.js';
+// import Swiper from 'swiper';
+
+import 'swiper/css';
+
+const swiperOption = (progressCircle, progressContent) => ({
+  effect: 'cube',
+  loop: true,
+  keyboard: {
+    enabled: true,
+  },
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  },
+  on: {
+    autoplayTimeLeft(s, time, progress) {
+      progressCircle.style.setProperty('--progress', 1 - progress);
+      progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+    },
+  },
+  grabCursor: true,
+  cubeEffect: {
+    shadow: true,
+    slideShadows: true,
+    shadowOffset: 20,
+    shadowScale: 0.94,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+});
 
 const getTrendMovieOfDay = async () => {
   try {
@@ -16,12 +48,14 @@ const getTrendMovieOfDay = async () => {
     document.querySelector('.js-hero-wrapper').innerHTML =
       createMarkupMovieList(correctList);
     addEventListenerByOpenTrailer();
-    new Swiper('.hero-swiper', {
-      scrollbar: {
-        el: '.swiper-scrollbar',
-        hide: true,
-      },
-    });
+
+    const progressCircle = document.querySelector('.autoplay-progress svg');
+    const progressContent = document.querySelector('.autoplay-progress span');
+
+    new Swiper(
+      '.js-hero-wrapper',
+      swiperOption(progressCircle, progressContent)
+    );
   } catch (error) {
     console.log('error:', error);
   }
@@ -31,12 +65,18 @@ const getTrendMovieOfDay = async () => {
 getTrendMovieOfDay();
 
 const createMarkupMovieList = movies => `
-    <div class="swiper hero-swiper ">
+
       <div class="swiper-wrapper">
         ${movies.map(movie => createMarkupMovieItem(movie)).join('')}
       </div>
-      <div class="swiper-scrollbar"></div>
-    </div>`;
+      <div class="swiper-pagination"></div>
+      <div class="autoplay-progress">
+      <svg viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20"></circle>
+      </svg>
+      <span></span>
+    </div>
+    `;
 
 const createMarkupMovieItem = ({
   id,
@@ -51,20 +91,22 @@ const createMarkupMovieItem = ({
         ${getBgImg(backdrop_path, backdrop_path, original_title)}/>
       
       <div class="container">
-        <h1 class=" hero-title">${original_title}</h1>
-        <div class="hero-movie-rating">
-          ${ratingStarsMarkup(vote_average * 10)}
+        <div class="hero-text-wrap">
+          <h1 class=" hero-title">${original_title}</h1>
+          <div class="hero-movie-rating">
+            ${ratingStarsMarkup(vote_average * 10)}
+          </div>
+          <p class=" hero-text">${overview}</p>
         </div>
-        <p class=" hero-text">${overview}</p>
 
         <div class="hero-button-wrap">
-          <button data-movie_id_for_modal=${id}
-            type="button" class="button-accent">
-              Get Open Modal
-          </button>
-          <button data-movie_id_for_trailer=${id}
+        <button data-movie_id_for_trailer=${id}
             type="button" class="js-button-show-trailer button-accent">
-              Get Open Trailer
+              Watch trailer
+          </button>
+          <button data-movie_id_for_modal=${id}
+            type="button" class="button-light-theme">
+              More details
           </button>
         </div>
 

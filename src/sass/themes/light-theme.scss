@@ -2,8 +2,13 @@
 
 body,
 .header,
-.home-upcoming-movie-detail-vote > span {
+.home-upcoming-movie-detail-vote > span,
+.swiper-cube .swiper-cube-shadow:before {
   transition: background-color $delay-change-theme $cubic;
+}
+
+.hero-wrapper .swiper-slide::before {
+  transition: background-image $delay-change-theme $cubic;
 }
 
 .header-mobile-menu-button,
@@ -16,13 +21,37 @@ body,
 .home-upcoming-movie-detail-vote,
 .home-upcoming-movie-detail-vote > span,
 .home-upcoming-movie-desc-title,
-.footer-text {
+.footer-text,
+.hero-text,
+.hero-title {
   transition: color $delay-change-theme $cubic;
 }
 
 //// theme styles
 .light-theme {
   background-color: $background-color-light;
+
+  & .button-light-theme {
+    color: $accent-color;
+    box-shadow: inset 0 0 0 1000px $background-color-dark;
+    &:hover,
+    &:focus {
+      color: $accent-color;
+      box-shadow: inset 0 0 0 1000px $background-color-light, $shadow;
+    }
+  }
+
+  & .button-dark-theme {
+    color: $text-color-dark;
+
+    box-shadow: inset 0 1000px $text-color-light;
+
+    &:hover,
+    &:focus {
+      color: $accent-color;
+      box-shadow: inset 0 0 0 1000px $background-color-dark, $shadow;
+    }
+  }
 
   & .header,
   & .modal-movie-card-wrap {
@@ -73,4 +102,33 @@ body,
   & .modal-movie-card-button-close > svg {
     stroke: $title-color-dark;
   }
+
+  & .swiper-cube .swiper-cube-shadow:before {
+    background-color: $background-color-dark;
+  }
+
+  // & .hero-text {
+  //   color: $text-color-dark;
+  // }
+
+  // & .hero-title {
+  //   color: $text-color-dark;
+  // }
+
+  // & .hero-wrapper .swiper-slide::before {
+  //   background-image: linear-gradient(
+  //       90deg,
+  //       rgba(0, 0, 0, 0.8) 0%,
+  //       rgba(255, 255, 255, 0) 60%,
+  //       rgba(255, 255, 255, 0) 60%,
+  //       rgba(255, 255, 255, 1) 100%
+  //     ),
+  //     linear-gradient(
+  //       180deg,
+  //       rgba(255, 255, 255, 0.5) 0%,
+  //       rgba(255, 255, 255, 0) 35%,
+  //       rgba(255, 255, 255, 0) 65%,
+  //       rgba(255, 255, 255.5) 100%
+  //     );
+  // }
 }

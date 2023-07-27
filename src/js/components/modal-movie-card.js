@@ -52,7 +52,7 @@ export const markupModalMovieCard = ({
     <p class="modal-movie-card-desc-title">About</p>
     <p class="modal-movie-card-desc">${overview}</p>
 
-    <button type="button" class="js-add-remove-btn button-accent">
+    <button type="button" class="js-add-remove-btn button-dark-theme">
       Add to my library
     </button>
   </div>

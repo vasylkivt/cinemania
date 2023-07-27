@@ -39,8 +39,12 @@ const getGenresList = async () => {
 };
 
 // Повна інформація про можливий трейлер фільма на ютубі
-const getTrailerByMovieId = movieId => {
-  return axios.get(`movie/${movieId}/videos?api_key=${API_KEY}`);
+const getTrailerByMovieId = async movieId => {
+  const { data } = await axios.get(
+    `movie/${movieId}/videos?api_key=${API_KEY}`
+  );
+
+  return data.results;
 };
 
 const getMovieCastByMovieId = async movieId => {

@@ -2,6 +2,7 @@ import comingSoonImg from '../../images/default_horizontal_poster_path.jpg';
 import svgCloseIcon from '../../images/icon/sprite.svg';
 
 export const markupModalMovieCard = ({
+  id,
   poster_path,
   original_title,
   vote_average,
@@ -12,18 +13,20 @@ export const markupModalMovieCard = ({
 }) => {
   return `
   
-  <div class="modal-movie-card-wrap"> 
+  <div class=" modal-movie-card-wrap"> 
   <div>
     <button type="button" class="js-close-modal-btn modal-movie-card-button-close">
       <svg class="modal-movie-card-button-close-icon">
         <use href="${svgCloseIcon}#icon-button-close"></use>
       </svg>
     </button>
-    <div class="modal-movie-card-inner-wrap">
-    <div class="modal-movie-card-inner">
-      <svg class="js-button-show-trailer modal-movie-card-button-close-icon">
-        <use href="${svgCloseIcon}#icon-play"></use>
-      </svg>
+    <div  class="modal-movie-card-inner-wrap">
+    <div  class="modal-movie-card-inner">
+     <button class="js-button-show-trailer" data-movie_id="${id}" type="button">
+        <svg class=" modal-movie-card-button-close-icon">
+          <use href="${svgCloseIcon}#icon-play"></use>
+        </svg>
+     </button>
       </div>
       <img
         class="modal-movie-card-img"

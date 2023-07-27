@@ -1,27 +1,36 @@
-// import { TMDB_API } from '../api/themoviedbAPI';
+import { TMDB_API } from '../api/themoviedbAPI';
 
-// import { BasicLightbox } from './basic-lightbox';
+import { BasicLightbox } from './basic-lightbox';
 
-// // try {
-// //   document
-// //     .querySelectorAll('.js-button-show-trailer')
-// //     .forEach(el => el.addEventListener('click', onMovieCardClick));
-// // } catch (error) {
-// //   console.log(error);
-// // }
+export const openTrailer = () => {
+  try {
+    document
+      .querySelector('.js-button-show-trailer')
+      .addEventListener('click', onOpenTrailerBtnClick);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// function onOpenTrailerBtnClick(e) {
-//   if (e.target.dataset.movie_id) getTrailerByMovieId(e.target.dataset.movie_id);
-// }
+function onOpenTrailerBtnClick(e) {
+  console.log();
 
-// async function getTrailerByMovieId(movieId) {
-//   try {
-//     const movie = await TMDB_API.getMovieByMovieId(movieId);
+  if (e.currentTarget.dataset.movie_id)
+    getTrailerByMovieId(e.currentTarget.dataset.movie_id);
+}
 
-//     const instance = BasicLightbox.openModal(movie);
+async function getTrailerByMovieId(movieId) {
+  try {
+    const trailers = await TMDB_API.getTrailerByMovieId(movieId);
 
-//     instance.show();
-//   } catch (error) {
-//     console.log('error:', error);
-//   }
-// }
+    const trailer = trailers.find(
+      el => el.type === 'Trailer' || el.name === 'Official Trailer'
+    );
+
+    const instance = BasicLightbox.showTrailer(trailer);
+
+    instance.show();
+  } catch (error) {
+    console.log('error:', error);
+  }
+}

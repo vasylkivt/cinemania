@@ -7,8 +7,6 @@ import { addEventListenerByOpenTrailer } from '../../services/open-movie-trailer
 // import '~/node_modules/swiper/swiper-bundle.min.js';
 // import Swiper from 'swiper';
 
-import 'swiper/css';
-
 const swiperOption = (progressCircle, progressContent) => ({
   effect: 'cube',
   loop: true,

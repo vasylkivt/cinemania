@@ -18,9 +18,10 @@
 @import './components/toggle-switch.scss';
 @import './components/loader';
 
-@import './components/hero-content/hero-title';
-@import './components/hero-content/hero-section';
-@import './components/hero-content/hero-text';
+@import './layout/hero-content/hero-title';
+@import './layout/hero-content/hero-section';
+@import './layout/hero-content/hero-text';
+@import './layout/hero-content/swiper-hero-slider';
 
 @import './components/movie-card';
 @import './components/movie-list';

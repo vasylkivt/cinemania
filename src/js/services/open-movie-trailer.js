@@ -6,18 +6,16 @@ import { BasicLightbox } from './basic-lightbox';
 export const addEventListenerByOpenTrailer = () => {
   try {
     document
-      .querySelector('.js-button-show-trailer')
-      .addEventListener('click', onOpenTrailerBtnClick);
+      .querySelectorAll('.js-button-show-trailer')
+      .forEach(el => el.addEventListener('click', onOpenTrailerBtnClick));
   } catch (error) {
     console.log(error);
   }
 };
 
 function onOpenTrailerBtnClick(e) {
-  console.log();
-
-  if (e.currentTarget.dataset.movie_id)
-    getTrailerByMovieId(e.currentTarget.dataset.movie_id);
+  if (e.currentTarget.dataset.movie_id_for_trailer)
+    getTrailerByMovieId(e.currentTarget.dataset.movie_id_for_trailer);
 }
 
 async function getTrailerByMovieId(movieId) {

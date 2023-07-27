@@ -11,7 +11,8 @@ try {
 }
 
 function onMovieCardClick(e) {
-  if (e.target.dataset.movie_id) openMovieModalById(e.target.dataset.movie_id);
+  if (e.target.dataset.movie_id_for_modal)
+    openMovieModalById(e.target.dataset.movie_id_for_modal);
 }
 
 async function openMovieModalById(movieId) {

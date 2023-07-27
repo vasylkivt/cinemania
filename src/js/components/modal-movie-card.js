@@ -22,7 +22,7 @@ export const markupModalMovieCard = ({
     </button>
     <div  class="modal-movie-card-inner-wrap">
     <div  class="modal-movie-card-inner">
-     <button class="js-button-show-trailer" data-movie_id="${id}" type="button">
+     <button class="js-button-show-trailer" data-movie_id_for_trailer="${id}" type="button">
         <svg class=" modal-movie-card-button-close-icon">
           <use href="${svgCloseIcon}#icon-play"></use>
         </svg>

@@ -32,10 +32,7 @@
 @import './components/modal-trailer-iframe';
 @import './components/error-message-trailer';
 
-// @import './components/scrollbar';
 // @import './components/scroll-up';
-// //
-// @import './components/select';
 
 // // layout
 
@@ -53,7 +50,7 @@
 // // catalog
 
 // @import './layout/pages/catalog/hero';
-// @import './layout/pages/catalog/catalog-gallery';
+@import './layout/pages/catalog/catalog';
 // @import './layout/pages/catalog/catalog-gallery-select';
 
 // // my-library
@@ -63,6 +60,6 @@
 // @import './layout/pages/my-library/content-text-message';
 // @import './layout/pages/my-library/select-genres';
 
-// modal-windows
+// // modal-windows
 
 @import './layout/modal-movie-card';

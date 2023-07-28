@@ -3,6 +3,8 @@ import { markupErrorMessageTrailer } from '../components/error-mesage-trailer';
 
 import { BasicLightbox } from './basic-lightbox';
 
+const themoviedbAPI = new TMDB_API();
+
 export const addEventListenerByOpenTrailer = () => {
   try {
     document
@@ -20,7 +22,7 @@ function onOpenTrailerBtnClick(e) {
 
 async function getTrailerByMovieId(movieId) {
   try {
-    const trailers = await TMDB_API.getTrailerByMovieId(movieId);
+    const trailers = await themoviedbAPI.getTrailerByMovieId(movieId);
 
     if (trailers && trailers.length === 0) {
       const instance = BasicLightbox.errorMessage(markupErrorMessageTrailer());

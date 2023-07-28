@@ -1,20 +1,17 @@
 import comingSoonImg from '../../images/default-image-for-movie.webp';
 import { ratingStarsMarkup } from './rating-stars';
 
-export const createMarkupMovieList = (
-  movieList,
-  genresList
-) => `<ul class="movie-list">
-${movieList
-  .map(
-    ({
-      id,
-      poster_path,
-      genre_ids,
-      original_title,
-      release_date,
-      vote_average,
-    }) => `
+export const createMarkupMovieList = (movieList, genresList) =>
+  movieList
+    .map(
+      ({
+        id,
+        poster_path,
+        genre_ids,
+        original_title,
+        release_date,
+        vote_average,
+      }) => `
         <li data-movie_id_for_modal="${id}" class="movie-card">
           <img
           ${getImg(poster_path, original_title)}
@@ -33,10 +30,8 @@ ${movieList
           </div>
         </li>
        `
-  )
-  .join('')}
-
-</ul>`;
+    )
+    .join('');
 
 function getGenre(genreIds, genresList) {
   let genre = '';

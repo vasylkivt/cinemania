@@ -1,5 +1,7 @@
 import { TMDB_API } from '../api/themoviedbAPI';
 
+const themoviedbAPI = new TMDB_API();
+
 import { BasicLightbox } from './basic-lightbox';
 import { addEventListenerByOpenTrailer } from './open-movie-trailer';
 try {
@@ -17,7 +19,7 @@ function onMovieCardClick(e) {
 
 async function openMovieModalById(movieId) {
   try {
-    const movie = await TMDB_API.getMovieByMovieId(movieId);
+    const movie = await themoviedbAPI.getMovieByMovieId(movieId);
 
     const instance = BasicLightbox.openModal(movie);
 

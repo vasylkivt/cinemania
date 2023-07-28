@@ -1,0 +1,20 @@
+.catalog {
+  padding-top: 40px;
+
+  & .container {
+    outline: 1px solid tomato;
+  }
+}
+
+.catalog-search {
+  margin-bottom: 16px;
+  outline: 1px solid rgb(7, 176, 32);
+}
+
+.catalog-movie-list {
+  outline: 1px solid rgb(176, 176, 176);
+  margin-bottom: 20px;
+}
+.catalog-pagination {
+  outline: 1px solid aqua;
+}

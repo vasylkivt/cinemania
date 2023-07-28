@@ -1,145 +1,242 @@
-import axios from 'axios';
 import { randomElementOfArray } from '../helpers/random-element';
 
+import axios from 'axios';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
-const API_KEY = '267e0ef2e56c2254d403c0d4ffe19052';
 
-// Трендові фільми дня та тижня
-//! для хіро(1 або для слайдера5)
-//!  віклі три перші фільми
-const getTrendMovieByParam = async param => {
-  const { data } = await axios.get(
-    `trending/movie/${param}?api_key=${API_KEY}`
-  );
+export class TMDB_API {
+  #API_KEY = '267e0ef2e56c2254d403c0d4ffe19052';
 
-  return data.results;
-};
-
-// Нові фільми
-//! для Upcoming this months рандомний фільм
-const getUpcomingFilms = async () => {
-  const { data } = await axios.get(`movie/upcoming?api_key=${API_KEY}`);
-  const randomMovie = randomElementOfArray(data.results);
-
-  return getMovieByMovieId(randomMovie.id);
-};
-
-// Детальна інформація про фільм
-//!для модалки
-const getMovieByMovieId = async movieId => {
-  const { data } = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
-
-  return data;
-};
-
-// Перелік жанрів
-const getGenresList = async () => {
-  const { data } = await axios.get(`genre/movie/list?api_key=${API_KEY}`);
-  return data.genres;
-};
-
-// Повна інформація про можливий трейлер фільма на ютубі
-const getTrailerByMovieId = async movieId => {
-  const { data } = await axios.get(
-    `movie/${movieId}/videos?api_key=${API_KEY}`
-  );
-
-  return data.results;
-};
-
-const getMovieCastByMovieId = async movieId => {
-  const response = await axios.get(
-    `/movie/${movieId}/credits?api_key=${API_KEY}`
-  );
-  return response.data.cast;
-};
-
-const getMovieReviewsByMovieId = async movieId => {
-  const response = await axios.get(
-    `/movie/${movieId}/reviews?api_key=${API_KEY}`
-  );
-  return response.data.results;
-};
-
-const searchMovieByQuery = async (query, page) => {
-  const response = await axios.get(
-    `/search/movie?api_key=${API_KEY}&query=${query}&page=${page}`
-  );
-
-  return response.data;
-};
-
-export const TMDB_API = {
-  getTrendMovieByParam,
-  getMovieByMovieId,
-  getUpcomingFilms,
-  getTrailerByMovieId,
-  getMovieReviewsByMovieId,
-  getMovieCastByMovieId,
-  searchMovieByQuery,
-  getGenresList,
-};
-
-class ApiMovie {
-  #API_KEY = '28909b5df6d6afd9591e6fc0c7cef11e';
-  #BASE_URL = 'https://api.themoviedb.org/3/';
   #query = '';
+  #page = 1;
+  #year = null;
 
-  getTrend(param) {
-    return axios.get(
-      `${this.#BASE_URL}trending/movie/${param}?api_key=${this.#API_KEY}`
-    );
+  // Пошук фільму за запитом і роком
+  async searchMovieByQuery() {
+    const options = {
+      method: 'GET',
+      url: '/search/movie',
+      params: this.#year
+        ? {
+            api_key: this.#API_KEY,
+            query: this.#query,
+            page: this.#page,
+            year: this.#year,
+          }
+        : { api_key: this.#API_KEY, query: this.#query, page: this.#page },
+    };
+    const { data } = await axios.request(options);
+
+    return data;
   }
 
-  // Трендові фільми дня та тижня за сторінкою
-  getTrendByPage(param, page) {
-    return axios.get(
-      `${this.#BASE_URL}trending/movie/${param}?api_key=${
-        this.#API_KEY
-      }&page=${page}`
-    );
+  // Трендові фільми дня та тижня
+  async getTrendMovieByParam(param) {
+    const options = {
+      method: 'GET',
+      url: `/trending/movie/${param}`,
+      params: { api_key: this.#API_KEY, page: this.#page },
+    };
+
+    const { data } = await axios.request(options);
+
+    return data;
   }
 
   // Нові фільми
-  getNewFilms(page) {
-    return axios.get(
-      `${this.#BASE_URL}movie/upcoming?api_key=${this.#API_KEY}&page=${page}`
-    );
+  async getUpcomingFilms() {
+    const options = {
+      method: 'GET',
+      url: `/movie/upcoming`,
+      params: { api_key: this.#API_KEY },
+    };
+
+    const { data } = await axios.request(options);
+    return data;
   }
 
-  // Фільми за ключовим словом + за роком
-  searchByQueryYear(page) {
-    return axios.get(
-      `${this.#BASE_URL}search/movie?api_key=${this.#API_KEY}&query=${
-        this.query
-      }&page=${page}`
-    );
+  // Нові фільми (один довільний фільм)
+  async randomUpcomingFilms() {
+    const { results } = await this.getUpcomingFilms();
+    const { id } = randomElementOfArray(results);
+    const movie = await this.getMovieByMovieId(id);
+    return movie;
   }
 
   // Детальна інформація про фільм
-  getMovieInfo(id) {
-    return axios.get(`${this.#BASE_URL}movie/${id}?api_key=${this.#API_KEY}`);
+  async getMovieByMovieId(movieId) {
+    const options = {
+      method: 'GET',
+      url: `/movie/${movieId}`,
+      params: { api_key: this.#API_KEY },
+    };
+
+    const { data } = await axios.request(options);
+
+    return data;
   }
 
   // Повна інформація про можливий трейлер фільма на ютубі
-  getTrailer(id) {
-    return axios.get(
-      `${this.#BASE_URL}movie/${id}/videos?api_key=${this.#API_KEY}`
-    );
+  async getTrailerByMovieId(movieId) {
+    const options = {
+      method: 'GET',
+      url: `movie/${movieId}/videos`,
+      params: { api_key: this.#API_KEY },
+    };
+
+    const { data } = await axios.request(options);
+
+    return data.results;
   }
 
   // Перелік жанрів
-  getGenresList() {
-    return axios.get(
-      `${this.#BASE_URL}genre/movie/list?api_key=${this.#API_KEY}`
-    );
+  async getGenresList() {
+    const options = {
+      method: 'GET',
+      url: 'genre/movie/list',
+      params: { api_key: this.#API_KEY },
+    };
+
+    const { data } = await axios.request(options);
+
+    return data.genres;
   }
 
   get query() {
     return this.#query;
   }
+  set query(query) {
+    this.#query = query.trim();
+  }
 
-  set query(newQuery) {
-    this.#query = newQuery;
+  get page() {
+    return this.#page;
+  }
+  set page(page) {
+    this.#page = page;
+  }
+
+  get year() {
+    return this.#year;
+  }
+  set year(year) {
+    this.#year = year;
   }
 }
+
+// Трендові фільми дня та тижня
+
+// const getTrendMovieByParam = async (param, page = 1) => {
+//   const options = {
+//     method: 'GET',
+//     url: `/trending/movie/${param}`,
+//     params: { api_key: API_KEY, page },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   return data;
+// };
+
+// Нові фільми
+// const getUpcomingFilms = async () => {
+//   const options = {
+//     method: 'GET',
+//     url: `/movie/upcoming`,
+//     params: { api_key: API_KEY },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   const randomMovie = randomElementOfArray(data.results);
+
+//   return getMovieByMovieId(randomMovie.id);
+// };
+
+// Детальна інформація про фільм
+
+// const getMovieByMovieId = async movieId => {
+//   const options = {
+//     method: 'GET',
+//     url: `/movie/${movieId}`,
+//     params: { api_key: API_KEY },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   return data;
+// };
+
+// Перелік жанрів
+// const getGenresList = async () => {
+//   const options = {
+//     method: 'GET',
+//     url: 'genre/movie/list',
+//     params: { api_key: API_KEY },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   return data.genres;
+// };
+
+// Повна інформація про можливий трейлер фільма на ютубі
+// const getTrailerByMovieId = async movieId => {
+//   const options = {
+//     method: 'GET',
+//     url: `movie/${movieId}/videos`,
+//     params: { api_key: API_KEY },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   return data.results;
+// };
+
+// const searchMovieByQuery = async (query, page = 1, year) => {
+//   const options = {
+//     method: 'GET',
+//     url: '/search/movie',
+//     params: year
+//       ? { api_key: API_KEY, query, page, year }
+//       : { api_key: API_KEY, query, page },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   return data;
+// };
+
+// const getMovieCastByMovieId = async movieId => {
+//   const options = {
+//     method: 'GET',
+//     url: `/movie/${movieId}/credits`,
+//     params: { api_key: API_KEY },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   return data.cast;
+// };
+
+// const getMovieReviewsByMovieId = async movieId => {
+//   const options = {
+//     method: 'GET',
+//     url: `/movie/${movieId}/reviews`,
+//     params: { api_key: API_KEY },
+//   };
+
+//   const { data } = await axios.request(options);
+
+//   return data.results;
+// };
+
+// export const TMDB_API = {
+//   getTrendMovieByParam,
+//   getMovieByMovieId,
+//   getUpcomingFilms,
+//   getTrailerByMovieId,
+//   getMovieReviewsByMovieId,
+//   getMovieCastByMovieId,
+//   searchMovieByQuery,
+//   getGenresList,
+// };

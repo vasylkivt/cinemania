@@ -6,3 +6,4 @@ import './js/services/mobile-menu';
 import './js/services/modal-movie-open';
 
 import './js/pages/catalog/hero';
+import './js/pages/catalog/catalog';

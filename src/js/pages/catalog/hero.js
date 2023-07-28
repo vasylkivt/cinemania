@@ -2,10 +2,38 @@ import { ratingStarsMarkup } from '../../components/rating-stars';
 import defaultImg from '../../../images/default_horizontal_poster_path.jpg';
 import { Loader } from '../../components/loader';
 import { TMDB_API } from '../../api/themoviedbAPI';
+
 import { addEventListenerByOpenTrailer } from '../../services/open-movie-trailer';
 
 // import '~/node_modules/swiper/swiper-bundle.min.js';
 // import Swiper from 'swiper';
+
+const themoviedbAPI = new TMDB_API();
+
+const getTrendMovieOfDay = async () => {
+  try {
+    Loader.onShow();
+    const { results } = await themoviedbAPI.getTrendMovieByParam('day');
+    const correctList = results.slice(0, 5);
+
+    document.querySelector('.js-hero-wrapper').innerHTML =
+      createMarkupMovieList(correctList);
+    addEventListenerByOpenTrailer();
+
+    const progressCircle = document.querySelector('.autoplay-progress svg');
+    const progressContent = document.querySelector('.autoplay-progress span');
+
+    new Swiper(
+      '.js-hero-wrapper',
+      swiperOption(progressCircle, progressContent)
+    );
+  } catch (error) {
+    console.log('error:', error);
+  }
+  Loader.onClose();
+};
+
+getTrendMovieOfDay();
 
 const swiperOption = (progressCircle, progressContent) => ({
   effect: 'cube',
@@ -36,31 +64,6 @@ const swiperOption = (progressCircle, progressContent) => ({
     clickable: true,
   },
 });
-
-const getTrendMovieOfDay = async () => {
-  try {
-    Loader.onShow();
-    const response = await TMDB_API.getTrendMovieByParam('day');
-    const correctList = response.slice(0, 5);
-
-    document.querySelector('.js-hero-wrapper').innerHTML =
-      createMarkupMovieList(correctList);
-    addEventListenerByOpenTrailer();
-
-    const progressCircle = document.querySelector('.autoplay-progress svg');
-    const progressContent = document.querySelector('.autoplay-progress span');
-
-    new Swiper(
-      '.js-hero-wrapper',
-      swiperOption(progressCircle, progressContent)
-    );
-  } catch (error) {
-    console.log('error:', error);
-  }
-  Loader.onClose();
-};
-
-getTrendMovieOfDay();
 
 const createMarkupMovieList = movies => `
 

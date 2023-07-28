@@ -1,0 +1,56 @@
+<section class="catalog">
+  <div class="container">
+    <div class="catalog-search">
+      <form class="js-catalog-search-form catalog-search-form">
+        <label
+          ><input
+            placeholder="Film"
+            disabled
+            id="queryText"
+            type="text"
+            name="queryText"
+            value=""
+            class="catalog-search-query-text"
+        /></label>
+        <button
+          class="js-catalog-search-form-button-close is-hidden catalog-search-form-button-close"
+          type="button"
+        >
+          <svg
+            style="stroke: rgb(0, 0, 0); transform: translateX(-25px)"
+            width="12"
+            height="12"
+            class="catalog-search-form-button-close-icon"
+          >
+            <use href="./images/icon/sprite.svg#icon-button-close"></use>
+          </svg>
+        </button>
+
+        <select name="select" class="catalog-search-select">
+          <option value="">Year</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+        </select>
+        <label
+          ><input
+            placeholder="Search"
+            id="query"
+            required
+            type="text"
+            name="query"
+            class="catalog-search-input"
+        /></label>
+        <button class="search-button-dark-theme" type="submit ">
+          <svg width="12" height="12">
+            <use href="./images/icon/sprite.svg#icon-search"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
+    <ul
+      class="js-open-modal-movie js-catalog-movie-list movie-list catalog-movie-list"
+    ></ul>
+    <div class="js-catalog-pagination catalog-pagination"></div>
+  </div>
+</section>

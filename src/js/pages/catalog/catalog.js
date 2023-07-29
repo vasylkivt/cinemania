@@ -1,9 +1,23 @@
-import { TMDB_API, TMDB_APIi } from '../../api/themoviedbAPI';
-import { markupBtnLoadMore } from '../../components/button-load-more';
-import { markupErrorMessageSearch } from '../../components/error-message-search';
-import { Loader } from '../../components/loader';
-import { markupPagination } from '../../components/markup-pagimation';
-import { createMarkupMovieList } from '../../components/movie-list';
+import { TMDB_API } from '../../api';
+import {
+  Loader,
+  createMarkupMovieList,
+  markupErrorMessageSearch,
+} from '../../components';
+
+//!======================================================
+import Pagination from 'tui-pagination/dist/tui-pagination.min.js';
+import 'tui-pagination/dist/tui-pagination.min.css';
+const pagination = new Pagination(
+  document.querySelector('.tui-pagination-container'),
+  {
+    totalItems: 1000,
+    itemsPerPage: 20,
+    visiblePages: 5,
+    centerAlign: true,
+  }
+);
+//!======================================================
 
 const themoviedbAPI = new TMDB_API();
 
@@ -21,6 +35,7 @@ async function getMovieList(action) {
     if (action === 'week-movies') {
       const response = await themoviedbAPI.getTrendMovieByParam('week');
       const genresList = await themoviedbAPI.getGenresList();
+
       updateGallery(response, genresList);
     } else if (action === 'query-movies') {
       const response = await themoviedbAPI.searchMovieByQuery();
@@ -34,7 +49,7 @@ async function getMovieList(action) {
 }
 
 const updateGallery = (response, genresList) => {
-  const { results, page: currentPage, total_pages, total_results } = response;
+  const { results, total_pages, total_results } = response;
 
   const catalogPaginationEl = document.querySelector('.js-catalog-pagination');
 
@@ -43,22 +58,15 @@ const updateGallery = (response, genresList) => {
     catalogMovieList.innerHTML = markupErrorMessageSearch();
     return;
   }
+  catalogMovieList.innerHTML = createMarkupMovieList(results, genresList);
 
-  if (currentPage < total_pages) {
-    catalogPaginationEl.innerHTML = markupBtnLoadMore() + markupPagination();
-    document
-      .querySelector('.js-load-more')
-      .addEventListener('click', handlerLoadMoreClick);
-  } else {
-    catalogPaginationEl.innerHTML = '';
+  if (1 < total_pages) {
+    //!======================================================
+    pagination.setTotalItems(total_results > 10000 ? 10000 : total_results);
+    //!======================================================
+    return;
   }
-
-  if (themoviedbAPI.page === 1) catalogMovieList.innerHTML = '';
-
-  catalogMovieList.insertAdjacentHTML(
-    'beforeend',
-    createMarkupMovieList(results, genresList)
-  );
+  catalogPaginationEl.innerHTML = '';
 };
 
 const formEl = document.querySelector('.js-catalog-search-form');
@@ -94,13 +102,20 @@ function handlerSubmit(e) {
   themoviedbAPI.query = query.value;
 
   getMovieList('query-movies');
+  pagination.movePageTo(1);
 }
 
-function handlerLoadMoreClick() {
-  themoviedbAPI.page += 1;
-  if (themoviedbAPI.query === '') {
-    getMovieList('week-movies');
-  } else {
+//!======================================================
+pagination.on('beforeMove', function (eventData) {
+  themoviedbAPI.page = eventData.page;
+  if (themoviedbAPI.query) {
     getMovieList('query-movies');
+    return;
   }
-}
+  getMovieList('week-movies');
+});
+//!======================================================
+
+// pagination.on('afterMove', function (eventData) {
+
+// });

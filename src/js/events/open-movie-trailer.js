@@ -1,7 +1,5 @@
-import { TMDB_API } from '../api/themoviedbAPI';
-import { markupErrorMessageTrailer } from '../components/error-mesage-trailer';
-
-import { BasicLightbox } from './basic-lightbox';
+import { TMDB_API, BasicLightbox } from '../api';
+import { markupErrorMessageTrailer } from '../components';
 
 const themoviedbAPI = new TMDB_API();
 
@@ -14,7 +12,6 @@ export const addEventListenerByOpenTrailer = () => {
     console.log(error);
   }
 };
-
 function onOpenTrailerBtnClick(e) {
   if (e.currentTarget.dataset.movie_id_for_trailer)
     getTrailerByMovieId(e.currentTarget.dataset.movie_id_for_trailer);

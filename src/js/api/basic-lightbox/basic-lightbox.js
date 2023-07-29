@@ -1,7 +1,7 @@
 import * as basicLightbox from 'basiclightbox';
-import { ServiceAddRemoveBtn } from './add-remove-movie';
-import { markupModalMovieCard } from '../components/modal-movie-card';
-import { ScrollService } from './scroll-services';
+import { ServiceAddRemoveBtn } from '../../events/add-remove-movie';
+import { markupModalMovieCard } from '../../components';
+import { ScrollService } from '../../services/scroll-services';
 
 const handlerEsc = function (evt) {
   if (evt.code === 'Escape') this.close();

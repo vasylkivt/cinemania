@@ -1,7 +1,7 @@
 import comingSoonImg from '../../../images/default-image-for-movie.webp';
 import defaultImg from '../../../images/default_horizontal_poster_path.jpg';
-import { TMDB_API } from '../../api/themoviedbAPI';
-import { ServiceAddRemoveBtn } from '../../services/add-remove-movie';
+import { TMDB_API } from '../../api/';
+import { ServiceAddRemoveBtn } from '../../events/add-remove-movie';
 
 const themoviedbAPI = new TMDB_API();
 getNewFilms();

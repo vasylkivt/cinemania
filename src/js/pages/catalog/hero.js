@@ -1,12 +1,10 @@
-import { ratingStarsMarkup } from '../../components/rating-stars';
 import defaultImg from '../../../images/default_horizontal_poster_path.jpg';
-import { Loader } from '../../components/loader';
-import { TMDB_API } from '../../api/themoviedbAPI';
+import 'swiper/swiper-bundle.min.css';
+import Swiper from 'swiper/swiper-bundle.min.mjs';
 
-import { addEventListenerByOpenTrailer } from '../../services/open-movie-trailer';
-
-// import '~/node_modules/swiper/swiper-bundle.min.js';
-// import Swiper from 'swiper';
+import { ratingStarsMarkup, Loader } from '../../components';
+import { TMDB_API } from '../../api';
+import { addEventListenerByOpenTrailer } from '../../events/open-movie-trailer';
 
 const themoviedbAPI = new TMDB_API();
 
@@ -20,13 +18,7 @@ const getTrendMovieOfDay = async () => {
       createMarkupMovieList(correctList);
     addEventListenerByOpenTrailer();
 
-    const progressCircle = document.querySelector('.autoplay-progress svg');
-    const progressContent = document.querySelector('.autoplay-progress span');
-
-    new Swiper(
-      '.js-hero-wrapper',
-      swiperOption(progressCircle, progressContent)
-    );
+    new Swiper('.js-hero-wrapper', swiperOption);
   } catch (error) {
     console.log('error:', error);
   }
@@ -35,7 +27,7 @@ const getTrendMovieOfDay = async () => {
 
 getTrendMovieOfDay();
 
-const swiperOption = (progressCircle, progressContent) => ({
+const swiperOption = {
   effect: 'cube',
   loop: true,
   keyboard: {
@@ -48,8 +40,12 @@ const swiperOption = (progressCircle, progressContent) => ({
   },
   on: {
     autoplayTimeLeft(s, time, progress) {
-      progressCircle.style.setProperty('--progress', 1 - progress);
-      progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+      document
+        .querySelector('.autoplay-progress svg')
+        .style.setProperty('--progress', 1 - progress);
+      document.querySelector(
+        '.autoplay-progress span'
+      ).textContent = `${Math.ceil(time / 1000)}s`;
     },
   },
   grabCursor: true,
@@ -63,9 +59,10 @@ const swiperOption = (progressCircle, progressContent) => ({
     el: '.swiper-pagination',
     clickable: true,
   },
-});
+};
 
-const createMarkupMovieList = movies => `
+function createMarkupMovieList(movies) {
+  return ` 
 
       <div class="swiper-wrapper">
         ${movies.map(movie => createMarkupMovieItem(movie)).join('')}
@@ -78,16 +75,17 @@ const createMarkupMovieList = movies => `
       <span></span>
     </div>
     `;
+}
 
-const createMarkupMovieItem = ({
+function createMarkupMovieItem({
   id,
   backdrop_path,
   original_title,
   overview,
   vote_average,
-}) => `
+}) {
+  return `
     <div class="swiper-slide">
-
         <img class="hero-background-img
         ${getBgImg(backdrop_path, backdrop_path, original_title)}/>
       
@@ -113,6 +111,7 @@ const createMarkupMovieItem = ({
 
       </div>
     </div>`;
+}
 
 function getBgImg(backdropPoster, title) {
   if (backdropPoster === null || !backdropPoster) {

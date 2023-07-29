@@ -1,9 +1,11 @@
 // styles scss
 import './sass/main.scss';
-import './js/services/init-theme';
-import './js/services/active-page';
-import './js/services/mobile-menu';
-import './js/services/modal-movie-open';
+
+import './js/events/init-theme';
+import './js/events/active-page';
+import './js/events/mobile-menu';
+import './js/events/modal-movie-open';
+// import './js/events/open-movie-trailer';
 
 import './js/pages/catalog/hero';
 import './js/pages/catalog/catalog';

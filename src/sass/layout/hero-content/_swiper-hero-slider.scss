@@ -1,4 +1,4 @@
-.hero-wrapper {
+.swiper.hero-wrapper {
   max-width: 1440px;
   & .swiper-slide::before {
     content: '';
@@ -54,6 +54,49 @@
     transform: translateX(-50%);
     max-width: 1440px;
   }
+
+  & .autoplay-progress {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: $accent-color;
+    border-radius: 50%;
+    box-shadow: $shadow-hover, inset $shadow-hover;
+  }
+
+  & .autoplay-progress svg {
+    --progress: 0;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    stroke-width: 4px;
+    stroke: $accent-color;
+    fill: none;
+    stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+    stroke-dasharray: 125.6;
+    transform: rotate(-90deg);
+  }
+
+  & .swiper-pagination-bullet {
+    background-color: $accent-color;
+    width: 30px;
+
+    transition: opacity 500ms $cubic;
+  }
+
+  & .swiper-cube .swiper-cube-shadow:before {
+    background: #ffffff;
+  }
 }
 
 .hero-background-img {
@@ -92,51 +135,4 @@
 .hero-button-wrap {
   display: flex;
   gap: 10px;
-}
-
-.autoplay-progress {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 10;
-  width: 70px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: $accent-color;
-  border-radius: 50%;
-  box-shadow: $shadow-hover, inset $shadow-hover;
-}
-
-.autoplay-progress svg {
-  --progress: 0;
-  position: absolute;
-  left: 0;
-  top: 0px;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  stroke-width: 4px;
-  stroke: $accent-color;
-  fill: none;
-  stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
-  stroke-dasharray: 125.6;
-  transform: rotate(-90deg);
-}
-
-.swiper-pagination-bullet-active {
-  background-color: $accent-color;
-}
-
-.swiper-cube .swiper-cube-shadow:before {
-  background: #ffffff;
-}
-
-.hero-text-wrap {
-  // box-sizing: content-box;
-  // padding: 25px;
-  // border-radius: 25px;
-  // background-color: rgba(0, 0, 0, 0.316);
 }

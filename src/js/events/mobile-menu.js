@@ -1,4 +1,4 @@
-import { ScrollService } from './scroll-services';
+import { ScrollService } from '../services/scroll-services';
 
 const refs = {
   openMobileMenuBtn: document.querySelector('.js-open-mobile-menu-button'),

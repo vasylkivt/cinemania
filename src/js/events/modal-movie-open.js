@@ -1,9 +1,9 @@
-import { TMDB_API } from '../api/themoviedbAPI';
+import { TMDB_API, BasicLightbox } from '../api';
 
 const themoviedbAPI = new TMDB_API();
 
-import { BasicLightbox } from './basic-lightbox';
 import { addEventListenerByOpenTrailer } from './open-movie-trailer';
+
 try {
   document
     .querySelectorAll('.js-open-modal-movie')

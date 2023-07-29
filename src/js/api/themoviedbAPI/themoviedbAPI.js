@@ -1,4 +1,4 @@
-import { randomElementOfArray } from '../helpers/random-element';
+import { randomElementOfArray } from '../../helpers';
 
 import axios from 'axios';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
@@ -8,7 +8,7 @@ export class TMDB_API {
 
   #query = '';
   #page = 1;
-  #year = null;
+  #year = '';
 
   // Пошук фільму за запитом і роком
   async searchMovieByQuery() {

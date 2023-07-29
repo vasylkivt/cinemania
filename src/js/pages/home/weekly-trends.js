@@ -1,7 +1,7 @@
-import { TMDB_API } from '../../api/themoviedbAPI';
-import { Loader } from '../../components/loader';
+import { TMDB_API } from '../../api/';
+import { Loader } from '../../components';
 
-import { createMarkupMovieList } from '../../components/movie-list';
+import { createMarkupMovieList } from '../../components';
 
 const themoviedbAPI = new TMDB_API();
 

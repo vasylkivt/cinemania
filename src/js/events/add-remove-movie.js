@@ -1,4 +1,5 @@
-import Storage from './local-storage';
+import Storage from '../services/local-storage';
+
 const STORAGE_KEY = {
   myLibraryMoviesList: 'my-library-movies-list',
 };

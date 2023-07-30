@@ -14,14 +14,18 @@ export class PagePagination {
 
   showPrevNextBtn = false;
 
-  constructor(element, elementLoadMoreBtn) {
-    this.element = element;
-    this.element.addEventListener('click', this.onPaginationClick);
-    this.element.innerHTML = this.markupPaginationBtn();
+  constructor({ element, elementLoadMoreBtn }) {
+    if (element) {
+      this.element = element;
+      this.element.addEventListener('click', this.onPaginationClick);
+      this.element.innerHTML = this.markupPaginationBtn();
+    }
 
-    this.elementLoadMoreBtn = elementLoadMoreBtn;
-    this.elementLoadMoreBtn.addEventListener('click', this.onLoadMoreClick);
-    this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+    if (elementLoadMoreBtn) {
+      this.elementLoadMoreBtn = elementLoadMoreBtn;
+      this.elementLoadMoreBtn.addEventListener('click', this.onLoadMoreClick);
+      this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+    }
   }
 
   setTotalPage(totalPage) {
@@ -31,12 +35,16 @@ export class PagePagination {
       this.showBtnTotalPage = false;
     }
 
-    this.element.innerHTML = this.markupPaginationBtn();
-    this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+    if (this.element) {
+      this.element.innerHTML = this.markupPaginationBtn();
+    }
+    if (this.elementLoadMoreBtn) {
+      this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+    }
   }
 
-  on(callback) {
-    this.callback = callback;
+  onPagination(callback) {
+    this.callbackPagination = callback;
   }
 
   onLoadMore(callback) {
@@ -61,7 +69,7 @@ export class PagePagination {
           this.page = Number(action);
       }
 
-      this.callback(this.page, this.actionClick);
+      this.callbackPagination(this.page, this.actionClick);
       this.setPaginationBtn();
     }
   };
@@ -79,8 +87,12 @@ export class PagePagination {
       this.page > 3 && !(this.totalPage <= this.totalButtons) ? true : false;
     this.showSetPageBtnNext = this.page < this.totalPage - 3 ? true : false;
     this.showBtnTotalPage = this.page < this.totalPage - 2 ? true : false;
-    this.element.innerHTML = this.markupPaginationBtn();
-    this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+    if (this.element) {
+      this.element.innerHTML = this.markupPaginationBtn();
+    }
+    if (this.elementLoadMoreBtn) {
+      this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+    }
   }
 
   dynamicButtons() {
@@ -120,6 +132,9 @@ export class PagePagination {
   markupPaginationBtn() {
     if (!(1 < this.totalPage)) {
       return '';
+    }
+    if (!this.element) {
+      return;
     }
     return `
 

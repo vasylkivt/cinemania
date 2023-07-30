@@ -1,4 +1,3 @@
-export * from './button-load-more';
 export * from './error-mesage-trailer';
 export * from './error-message-search';
 export * from './loader';

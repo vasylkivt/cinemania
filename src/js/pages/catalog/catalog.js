@@ -1,23 +1,9 @@
-import { TMDB_API } from '../../api';
+import { PagePagination, TMDB_API } from '../../api';
 import {
   Loader,
   createMarkupMovieList,
   markupErrorMessageSearch,
 } from '../../components';
-
-//!======================================================
-import Pagination from 'tui-pagination/dist/tui-pagination.min.js';
-import 'tui-pagination/dist/tui-pagination.min.css';
-const pagination = new Pagination(
-  document.querySelector('.tui-pagination-container'),
-  {
-    totalItems: 1000,
-    itemsPerPage: 20,
-    visiblePages: 5,
-    centerAlign: true,
-  }
-);
-//!======================================================
 
 const themoviedbAPI = new TMDB_API();
 
@@ -25,6 +11,12 @@ const catalogMovieList = document.querySelector('.js-catalog-movie-list');
 const formButtonClose = document.querySelector(
   '.js-catalog-search-form-button-close'
 );
+const catalogPaginationEl = document.querySelector('.js-catalog-pagination');
+//!===================================================
+const pagination = new PagePagination(
+  document.querySelector('.js-catalog-pagination-btn-wrap')
+);
+//!===================================================
 
 getMovieList('week-movies');
 
@@ -49,24 +41,31 @@ async function getMovieList(action) {
 }
 
 const updateGallery = (response, genresList) => {
-  const { results, total_pages, total_results } = response;
-
-  const catalogPaginationEl = document.querySelector('.js-catalog-pagination');
+  const { results, page: currentPage, total_pages, total_results } = response;
 
   if (results.length === 0) {
     catalogPaginationEl.innerHTML = '';
     catalogMovieList.innerHTML = markupErrorMessageSearch();
     return;
   }
-  catalogMovieList.innerHTML = createMarkupMovieList(results, genresList);
 
-  if (1 < total_pages) {
-    //!======================================================
-    pagination.setTotalItems(total_results > 10000 ? 10000 : total_results);
-    //!======================================================
-    return;
+  if (currentPage < total_pages) {
+    document.querySelector('.js-load-more').classList.remove('is-hidden');
+  } else {
+    document.querySelector('.js-load-more').classList.add('is-hidden');
   }
-  catalogPaginationEl.innerHTML = '';
+
+  if (!(1 < total_pages)) {
+    catalogPaginationEl.innerHTML = '';
+  }
+  //!===================================================
+  pagination.setTotalPage(total_pages);
+  //!===================================================
+
+  catalogMovieList.insertAdjacentHTML(
+    'beforeend',
+    createMarkupMovieList(results, genresList)
+  );
 };
 
 const formEl = document.querySelector('.js-catalog-search-form');
@@ -100,22 +99,34 @@ function handlerSubmit(e) {
   if (select.value !== '') themoviedbAPI.year = select.value;
 
   themoviedbAPI.query = query.value;
-
+  //!===================================================
+  pagination.reset();
+  //!===================================================
+  catalogMovieList.innerHTML = '';
   getMovieList('query-movies');
-  pagination.movePageTo(1);
 }
 
-//!======================================================
-pagination.on('beforeMove', function (eventData) {
-  themoviedbAPI.page = eventData.page;
-  if (themoviedbAPI.query) {
-    getMovieList('query-movies');
-    return;
-  }
-  getMovieList('week-movies');
+document.querySelector('.js-load-more').addEventListener('click', e => {
+  themoviedbAPI.page += 1;
+  if (themoviedbAPI.query === '') getMovieList('week-movies');
+
+  if (themoviedbAPI.query) getMovieList('query-movies');
 });
-//!======================================================
+//!===================================================
+pagination.on(page => {
+  onPaginationClick(page);
+});
+//!===================================================
 
-// pagination.on('afterMove', function (eventData) {
+function onPaginationClick(page) {
+  catalogMovieList.innerHTML = '';
 
-// });
+  if (themoviedbAPI.query) {
+    themoviedbAPI.page = page;
+    getMovieList('query-movies');
+  } else {
+    themoviedbAPI.page = page;
+
+    getMovieList('week-movies');
+  }
+}

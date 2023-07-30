@@ -1,10 +1,11 @@
 export class PagePagination {
   totalPage = null;
   page = 1;
+
   actionClick = null;
   callback = null;
 
-  localName = null;
+  totalButtons = 5;
 
   showSetPageBtnPrev = false;
   showSetPageBtnNext = true;
@@ -13,26 +14,33 @@ export class PagePagination {
 
   showPrevNextBtn = false;
 
-  constructor(element) {
-    console.log(element);
-    this.localName = element.localName;
-
+  constructor(element, elementLoadMoreBtn) {
     this.element = element;
     this.element.addEventListener('click', this.onPaginationClick);
-    this.element.innerHTML = this.markup();
+    this.element.innerHTML = this.markupPaginationBtn();
+
+    this.elementLoadMoreBtn = elementLoadMoreBtn;
+    this.elementLoadMoreBtn.addEventListener('click', this.onLoadMoreClick);
+    this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
   }
 
   setTotalPage(totalPage) {
     this.totalPage = totalPage;
-    if (this.totalPage < 6) {
+    if (this.totalPage <= this.totalButtons) {
+      this.showSetPageBtnNext = false;
       this.showBtnTotalPage = false;
     }
 
-    this.element.innerHTML = this.markup();
+    this.element.innerHTML = this.markupPaginationBtn();
+    this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
   }
 
   on(callback) {
     this.callback = callback;
+  }
+
+  onLoadMore(callback) {
+    this.callbackLoadMore = callback;
   }
 
   onPaginationClick = e => {
@@ -51,40 +59,78 @@ export class PagePagination {
       }
 
       this.callback(this.page, this.actionClick);
-      this.showSetPageBtnPrev = this.page > 4 ? true : false;
-      this.showFirstBtn = this.page > 3 ? true : false;
-      this.showSetPageBtnNext = this.page < this.totalPage - 3 ? true : false;
-      this.showBtnTotalPage = this.page < this.totalPage - 2 ? true : false;
-      this.element.innerHTML = this.markup();
+      this.setPaginationBtn();
     }
   };
 
-  dynamicButtons() {
-    let value = this.page < 4 ? 3 : this.page;
-    value = this.page > this.totalPage - 2 ? this.totalPage - 2 : value;
+  onLoadMoreClick = () => {
+    this.page += 1;
+    this.callbackLoadMore(this.page, this.actionClick);
 
-    return `
-        <button data-action="${value - 2}">${value - 2}</button>
-        <button data-action="${value - 1}">${value - 1}</button>
-        <button data-action="${value}">${value}</button>
-        <button data-action="${+value + 1}">${+value + 1}</button>
-        <button data-action="${+value + 2}">${+value + 2}</button>
-        `;
+    this.setPaginationBtn();
+  };
+
+  setPaginationBtn() {
+    this.showSetPageBtnPrev = this.page > 4 ? true : false;
+    this.showFirstBtn =
+      this.page > 3 && !(this.totalPage <= this.totalButtons) ? true : false;
+    this.showSetPageBtnNext = this.page < this.totalPage - 3 ? true : false;
+    this.showBtnTotalPage = this.page < this.totalPage - 2 ? true : false;
+    this.element.innerHTML = this.markupPaginationBtn();
+    this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
   }
 
-  markup() {
+  dynamicButtons() {
+    let value;
+
+    if (this.totalPage <= this.totalButtons) {
+      value = 3;
+    } else {
+      value = this.page <= 3 ? 3 : this.page;
+      value = this.page > this.totalPage - 2 ? this.totalPage - 2 : value;
+    }
+
+    let markupDynamicButtons = '';
+    const countIteration =
+      this.totalPage <= this.totalButtons ? this.totalPage : this.totalButtons;
+
+    for (let i = 0; i < countIteration; i++) {
+      markupDynamicButtons += `<button data-action="${value + (i - 2)}">${
+        value + (i - 2)
+      }</button>`;
+    }
+    return markupDynamicButtons;
+  }
+
+  markupBtnLoadMore() {
     return `
+    ${
+      this.page < this.totalPage
+        ? `<button class=" button-dark-theme" type="button">
+        Load More
+      </button>`
+        : ''
+    }
+     `;
+  }
+
+  markupPaginationBtn() {
+    if (!(1 < this.totalPage)) {
+      return '';
+    }
+    return `
+
     <style>
-        ${this.localName} button {
+        ${this.element.localName} button {
           padding: 4px;
           border: 1px solid tomato;
           border-radius: 4px;
           background-color: antiquewhite;
         }
       </style>
-
+      <div>current Page ${this.page}</div>
     ${this.showPrevNextBtn ? '<button data-action="prev"><-</button>' : ''}
-    ${this.showFirstBtn ? ` <button data-action="1">1</button>` : ''}
+    ${this.showFirstBtn ? ` <button data-action="1">1+</button>` : ''}
     ${
       this.showSetPageBtnPrev
         ? ` <button data-action="setPage">...</button>`

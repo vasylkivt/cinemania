@@ -4,8 +4,6 @@ export class PagePagination {
   actionClick = null;
   callback = null;
 
-  localName = null;
-
   showSetPageBtnPrev = false;
   showSetPageBtnNext = true;
   showFirstBtn = false;
@@ -13,26 +11,34 @@ export class PagePagination {
 
   showPrevNextBtn = false;
 
-  constructor(element) {
-    console.log(element);
-    this.localName = element.localName;
-
+  constructor(element, elementLoadMoreBtn) {
     this.element = element;
     this.element.addEventListener('click', this.onPaginationClick);
-    this.element.innerHTML = this.markup();
+    this.element.innerHTML = this.markupPaginationBtn();
+
+    this.elementLoadMoreBtn = elementLoadMoreBtn;
+    this.elementLoadMoreBtn.addEventListener('click', this.onLoadMoreClick);
+    this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
   }
 
   setTotalPage(totalPage) {
     this.totalPage = totalPage;
     if (this.totalPage < 6) {
+      this.showSetPageBtnNext = false;
       this.showBtnTotalPage = false;
     }
-
-    this.element.innerHTML = this.markup();
+    if (1 < this.totalPage) {
+      this.element.innerHTML = this.markupPaginationBtn();
+      this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+    }
   }
 
   on(callback) {
     this.callback = callback;
+  }
+
+  onLoadMore(callback) {
+    this.callbackLoadMore = callback;
   }
 
   onPaginationClick = e => {
@@ -55,7 +61,23 @@ export class PagePagination {
       this.showFirstBtn = this.page > 3 ? true : false;
       this.showSetPageBtnNext = this.page < this.totalPage - 3 ? true : false;
       this.showBtnTotalPage = this.page < this.totalPage - 2 ? true : false;
-      this.element.innerHTML = this.markup();
+      if (1 < this.totalPage) {
+        this.element.innerHTML = this.markupPaginationBtn();
+        this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
+      }
+    }
+  };
+
+  onLoadMoreClick = () => {
+    this.page += 1;
+    this.callbackLoadMore(this.page, this.actionClick);
+    this.showSetPageBtnPrev = this.page > 4 ? true : false;
+    this.showFirstBtn = this.page > 3 ? true : false;
+    this.showSetPageBtnNext = this.page < this.totalPage - 3 ? true : false;
+    this.showBtnTotalPage = this.page < this.totalPage - 2 ? true : false;
+    if (1 < this.totalPage) {
+      this.element.innerHTML = this.markupPaginationBtn();
+      this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
     }
   };
 
@@ -72,17 +94,33 @@ export class PagePagination {
         `;
   }
 
-  markup() {
+  markupBtnLoadMore() {
     return `
+    ${
+      this.page < this.totalPage
+        ? `<button class=" button-dark-theme" type="button">
+        Load More
+      </button>`
+        : ''
+    }
+     `;
+  }
+
+  markupPaginationBtn() {
+    if (!(1 < this.totalPage)) {
+      return '';
+    }
+    return `
+
     <style>
-        ${this.localName} button {
+        ${this.element.localName} button {
           padding: 4px;
           border: 1px solid tomato;
           border-radius: 4px;
           background-color: antiquewhite;
         }
       </style>
-
+      <div>current Page ${this.page}</div>
     ${this.showPrevNextBtn ? '<button data-action="prev"><-</button>' : ''}
     ${this.showFirstBtn ? ` <button data-action="1">1</button>` : ''}
     ${

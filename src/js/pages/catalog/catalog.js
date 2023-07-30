@@ -13,10 +13,11 @@ const formButtonClose = document.querySelector(
 );
 const catalogPaginationEl = document.querySelector('.js-catalog-pagination');
 //!===================================================
-const pagination = new PagePagination(
-  document.querySelector('.js-catalog-pagination-btn-wrap'),
-  document.querySelector('.js-catalog-load-more')
-);
+const pagination = new PagePagination({
+  element: document.querySelector('.js-catalog-pagination-btn-wrap'),
+  elementLoadMoreBtn: document.querySelector('.js-catalog-load-more'),
+});
+
 //!===================================================
 
 getMovieList('week-movies');
@@ -97,7 +98,7 @@ function handlerSubmit(e) {
 }
 
 //!===================================================
-pagination.on(page => {
+pagination.onPagination(page => {
   onPaginationClick(page);
 });
 

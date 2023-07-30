@@ -22,7 +22,11 @@ export class TMDB_API {
             page: this.#page,
             year: this.#year,
           }
-        : { api_key: this.#API_KEY, query: this.#query, page: this.#page },
+        : {
+            api_key: this.#API_KEY,
+            query: this.#query,
+            page: this.#page,
+          },
     };
     const { data } = await axios.request(options);
 

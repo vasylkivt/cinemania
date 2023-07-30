@@ -44,19 +44,14 @@ async function getMovieList(action) {
 const updateGallery = (response, genresList) => {
   const { results, page: currentPage, total_pages, total_results } = response;
 
-  if (results.length === 0) {
-    // catalogPaginationEl.innerHTML = '';
-    catalogMovieList.innerHTML = markupErrorMessageSearch();
-    return;
-  }
-
-  if (!(1 < total_pages)) {
-    // catalogPaginationEl.innerHTML = '';
-  }
   //!===================================================
   pagination.setTotalPage(total_pages > 500 ? 500 : total_pages);
   //!===================================================
 
+  if (results.length === 0) {
+    catalogMovieList.innerHTML = markupErrorMessageSearch();
+    return;
+  }
   catalogMovieList.insertAdjacentHTML(
     'beforeend',
     createMarkupMovieList(results, genresList)

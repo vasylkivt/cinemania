@@ -54,6 +54,9 @@ export class PagePagination {
         case 'next':
           this.actionClick = 'next';
           break;
+        case 'setPage':
+          this.actionClick = 'setPage';
+          break;
         default:
           this.page = Number(action);
       }
@@ -130,7 +133,7 @@ export class PagePagination {
       </style>
       <div>current Page ${this.page}</div>
     ${this.showPrevNextBtn ? '<button data-action="prev"><-</button>' : ''}
-    ${this.showFirstBtn ? ` <button data-action="1">1+</button>` : ''}
+    ${this.showFirstBtn ? ` <button data-action="1">1</button>` : ''}
     ${
       this.showSetPageBtnPrev
         ? ` <button data-action="setPage">...</button>`

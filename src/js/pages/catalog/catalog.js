@@ -11,11 +11,17 @@ const catalogMovieList = document.querySelector('.js-catalog-movie-list');
 const formButtonClose = document.querySelector(
   '.js-catalog-search-form-button-close'
 );
-const catalogPaginationEl = document.querySelector('.js-catalog-pagination');
+
+const catalogPaginationEl = document.querySelector(
+  '.js-catalog-pagination-btn-wrap'
+);
+const catalogLoadMoreBtn = document.querySelector('.js-catalog-load-more');
+
 //!===================================================
 const pagination = new PagePagination({
-  element: document.querySelector('.js-catalog-pagination-btn-wrap'),
-  elementLoadMoreBtn: document.querySelector('.js-catalog-load-more'),
+  element: catalogPaginationEl,
+  elementLoadMoreBtn: catalogLoadMoreBtn,
+  showNavigationBtn: true,
 });
 
 //!===================================================
@@ -98,12 +104,14 @@ function handlerSubmit(e) {
 }
 
 //!===================================================
-pagination.onPagination(page => {
-  onPaginationClick(page);
+pagination.onPagination(param => {
+  console.log('param:', param);
+  onPaginationClick(param.page);
 });
 
-pagination.onLoadMore(page => {
-  onLoadMoreClick(page);
+pagination.onLoadMore(param => {
+  console.log('param:', param);
+  onLoadMoreClick(param.page);
 });
 //!===================================================
 

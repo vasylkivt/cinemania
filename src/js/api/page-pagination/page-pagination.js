@@ -1,10 +1,15 @@
 export class PagePagination {
   styles = ` <style>
+
+
         .p-pagination  {
           padding: 8px 10px;
+          margin: 4px;
           border: 2px solid #006494;
-          border-radius: 5px;
+          border-radius: 10px;
           background-color: #e2e8f0;
+          min-height: 50px;
+          min-width: 50px;
         }
 
         .p-pagination-active{
@@ -92,10 +97,14 @@ export class PagePagination {
           break;
         case 'setPage':
           this.actionClick = 'setPage';
-          break;
+          this.moveToPage();
+
+          return;
         default:
+          if (this.page === Number(action)) return;
           this.page = Number(action);
       }
+      console.log(32321);
 
       this.callbackPagination({ page: this.page, action: this.actionClick });
       this.setPaginationBtn();
@@ -108,6 +117,27 @@ export class PagePagination {
 
     this.setPaginationBtn();
   };
+
+  moveToPage() {
+    const currentPage = this.page;
+    const promptPage = Number(prompt());
+
+    this.page = promptPage
+      ? promptPage > this.totalPage
+        ? currentPage
+        : promptPage
+      : currentPage;
+
+    if (currentPage === this.page) {
+      return;
+    }
+
+    this.callbackPagination({
+      page: this.page,
+      action: this.actionClick,
+    });
+    this.setPaginationBtn();
+  }
 
   setPaginationBtn() {
     this.showSetPageBtnPrev = this.page > 4 ? true : false;
@@ -165,20 +195,22 @@ export class PagePagination {
 
   markupPaginationBtn() {
     const markupBtn = (data, content, attr = '') =>
-      `<button class="p-pagination" type="button" data-action="${data}" ${attr}>${content} </button>`;
+      `<button class="p-pagination" type="button" data-action="${data}" ${attr}>${content}</button>`;
 
     const prevIsDisabled = this.page === 1 ? 'disabled' : '';
     const nextIsDisabled = this.page === this.totalPage ? 'disabled' : '';
 
     if (this.element && 1 < this.totalPage) {
       return `
-    ${this.showNavigationBtn ? markupBtn('prev', '<-', prevIsDisabled) : ''}
-    ${this.showFirstBtn ? markupBtn(1, 1) : ''}
-    ${this.showSetPageBtnPrev ? markupBtn('setPage', '...') : ''}
-    ${this.dynamicButtons()}
-    ${this.showSetPageBtnNext ? markupBtn('setPage', '...') : ''}
-    ${this.showBtnTotalPage ? markupBtn(this.totalPage, this.totalPage) : ''}
-    ${this.showNavigationBtn ? markupBtn('next', '->', nextIsDisabled) : ''}`;
+    ${this.showNavigationBtn ? markupBtn('prev', '<', prevIsDisabled) : ''}${
+        this.showFirstBtn ? markupBtn(1, 1) : ''
+      }${
+        this.showSetPageBtnPrev ? markupBtn('setPage', '...') : ''
+      }${this.dynamicButtons()}${
+        this.showSetPageBtnNext ? markupBtn('setPage', '...') : ''
+      }${
+        this.showBtnTotalPage ? markupBtn(this.totalPage, this.totalPage) : ''
+      }${this.showNavigationBtn ? markupBtn('next', '>', nextIsDisabled) : ''}`;
     }
 
     return '';

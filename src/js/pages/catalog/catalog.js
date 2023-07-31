@@ -132,6 +132,9 @@ function onLoadMoreClick(page) {
   }
 }
 function onPaginationClick(page) {
+  if (page > pagination.totalPage) {
+    return;
+  }
   catalogMovieList.innerHTML = '';
   pagination.page = page;
 

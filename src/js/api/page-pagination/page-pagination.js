@@ -82,10 +82,15 @@ export class PagePagination {
     this.callbackLoadMore = callback;
   }
 
+  onMoveToPage(callback) {
+    this.callbackMoveToPage = callback;
+  }
+
   onPaginationClick = e => {
     const { action } = e.target.dataset;
 
     if (e.target.dataset.action) {
+      e.target.blur();
       switch (action) {
         case 'prev':
           this.actionClick = 'prev';
@@ -97,14 +102,13 @@ export class PagePagination {
           break;
         case 'setPage':
           this.actionClick = 'setPage';
-          this.moveToPage();
+          this.moveToPage(this.callbackMoveToPage);
 
           return;
         default:
           if (this.page === Number(action)) return;
           this.page = Number(action);
       }
-      console.log(32321);
 
       this.callbackPagination({ page: this.page, action: this.actionClick });
       this.setPaginationBtn();
@@ -118,8 +122,14 @@ export class PagePagination {
     this.setPaginationBtn();
   };
 
-  moveToPage() {
+  moveToPage(pageToMove) {
     const currentPage = this.page;
+
+    if (pageToMove) {
+      pageToMove();
+      return;
+    }
+
     const promptPage = Number(prompt());
 
     this.page = promptPage

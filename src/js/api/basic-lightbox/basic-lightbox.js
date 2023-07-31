@@ -41,10 +41,12 @@ const showTrailer = trailer =>
       handlerEscape: null,
 
       onShow(instance) {
+        ScrollService.blockScroll();
         this.handlerEscape = handlerEsc.bind(instance);
         document.addEventListener('keydown', this.handlerEscape);
       },
       onClose() {
+        ScrollService.restoreScroll();
         document.removeEventListener('keydown', this.handlerEscape);
       },
     }
@@ -55,6 +57,7 @@ const errorMessage = markupError =>
     handlerEscape: null,
 
     onShow(instance) {
+      ScrollService.blockScroll();
       instance
         .element()
         .querySelector('.js-close-modal-error-message-btn').onclick =
@@ -63,11 +66,44 @@ const errorMessage = markupError =>
       document.addEventListener('keydown', this.handlerEscape);
     },
     onClose() {
+      ScrollService.restoreScroll();
+      document.removeEventListener('keydown', this.handlerEscape);
+    },
+  });
+
+const modalMoveToPage = (markup, callback) =>
+  basicLightbox.create(markup, {
+    handlerEscape: null,
+    page: null,
+    className: 'backdrop-move-to-page',
+    onShow(instance) {
+      // ScrollService.blockScroll();
+      instance.element().querySelector('.js-close-modal-btn').onclick =
+        instance.close;
+      this.handlerEscape = handlerEsc.bind(instance);
+      document.addEventListener('keydown', this.handlerEscape);
+
+      instance
+        .element()
+        .querySelector('.js-move-to-page')
+        .addEventListener('submit', e => {
+          e.preventDefault();
+          this.page = Number(e.currentTarget.elements.pageInput.value);
+          instance.close();
+        });
+    },
+    onClose() {
+      // ScrollService.restoreScroll();
+      if (this.page) {
+        callback(this.page);
+      }
+
       document.removeEventListener('keydown', this.handlerEscape);
     },
   });
 
 export const BasicLightbox = {
+  modalMoveToPage,
   openModal,
   showTrailer,
   errorMessage,

@@ -1,8 +1,9 @@
-import { PagePagination, TMDB_API } from '../../api';
+import { BasicLightbox, PagePagination, TMDB_API } from '../../api';
 import {
   Loader,
   createMarkupMovieList,
   markupErrorMessageSearch,
+  markupGoToPage,
 } from '../../components';
 
 const themoviedbAPI = new TMDB_API();
@@ -52,7 +53,9 @@ const updateGallery = (response, genresList) => {
   const { results, page: currentPage, total_pages, total_results } = response;
 
   //!===================================================
+
   pagination.setTotalPage(total_pages > 500 ? 500 : total_pages);
+
   //!===================================================
 
   if (results.length === 0) {
@@ -105,14 +108,17 @@ function handlerSubmit(e) {
 
 //!===================================================
 pagination.onPagination(param => {
-  console.log('param:', param);
   onPaginationClick(param.page);
 });
 
 pagination.onLoadMore(param => {
-  console.log('param:', param);
   onLoadMoreClick(param.page);
 });
+
+pagination.onMoveToPage(() => {
+  BasicLightbox.modalMoveToPage(markupGoToPage(), onPaginationClick).show();
+});
+
 //!===================================================
 
 function onLoadMoreClick(page) {
@@ -127,6 +133,8 @@ function onLoadMoreClick(page) {
 }
 function onPaginationClick(page) {
   catalogMovieList.innerHTML = '';
+  pagination.page = page;
+
   if (themoviedbAPI.query) {
     themoviedbAPI.page = page;
     getMovieList('query-movies');

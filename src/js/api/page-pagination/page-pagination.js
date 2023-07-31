@@ -1,7 +1,20 @@
 export class PagePagination {
+  styles = ` <style>
+        .p-pagination  {
+          padding: 8px 10px;
+          border: 2px solid #006494;
+          border-radius: 5px;
+          background-color: #e2e8f0;
+        }
+
+        .p-pagination-active{
+            border: 2px solid grey;
+            background-color: #2ec4b6;
+        }
+      </style>`;
+
   totalPage = null;
   page = 1;
-
   actionClick = null;
   callback = null;
 
@@ -11,10 +24,23 @@ export class PagePagination {
   showSetPageBtnNext = true;
   showFirstBtn = false;
   showBtnTotalPage = true;
+  showNavigationBtn = false;
 
-  showPrevNextBtn = false;
+  setDefaultStyle = true;
 
-  constructor({ element, elementLoadMoreBtn }) {
+  constructor({
+    element,
+    elementLoadMoreBtn,
+    showNavigationBtn = false,
+    setDefaultStyle = true,
+  }) {
+    this.showNavigationBtn = showNavigationBtn;
+    this.setDefaultStyle = setDefaultStyle;
+
+    if (this.setDefaultStyle) {
+      document.body.insertAdjacentHTML('beforebegin', this.styles);
+    }
+
     if (element) {
       this.element = element;
       this.element.addEventListener('click', this.onPaginationClick);
@@ -58,9 +84,11 @@ export class PagePagination {
       switch (action) {
         case 'prev':
           this.actionClick = 'prev';
+          this.page -= 1;
           break;
         case 'next':
           this.actionClick = 'next';
+          this.page += 1;
           break;
         case 'setPage':
           this.actionClick = 'setPage';
@@ -69,14 +97,14 @@ export class PagePagination {
           this.page = Number(action);
       }
 
-      this.callbackPagination(this.page, this.actionClick);
+      this.callbackPagination({ page: this.page, action: this.actionClick });
       this.setPaginationBtn();
     }
   };
 
   onLoadMoreClick = () => {
     this.page += 1;
-    this.callbackLoadMore(this.page, this.actionClick);
+    this.callbackLoadMore({ page: this.page, action: this.actionClick });
 
     this.setPaginationBtn();
   };
@@ -110,9 +138,15 @@ export class PagePagination {
       this.totalPage <= this.totalButtons ? this.totalPage : this.totalButtons;
 
     for (let i = 0; i < countIteration; i++) {
-      markupDynamicButtons += `<button data-action="${value + (i - 2)}">${
+      if (this.page === value + (i - 2)) {
+        markupDynamicButtons += `<button class="p-pagination p-pagination-active" data-action="${
+          value + (i - 2)
+        }">${value + (i - 2)}</button>`;
+        continue;
+      }
+      markupDynamicButtons += `<button class="p-pagination" data-action="${
         value + (i - 2)
-      }</button>`;
+      }">${value + (i - 2)}</button>`;
     }
     return markupDynamicButtons;
   }
@@ -121,7 +155,7 @@ export class PagePagination {
     return `
     ${
       this.page < this.totalPage
-        ? `<button class=" button-dark-theme" type="button">
+        ? `<button class="p-pagination" type="button">
         Load More
       </button>`
         : ''
@@ -130,43 +164,24 @@ export class PagePagination {
   }
 
   markupPaginationBtn() {
-    if (!(1 < this.totalPage)) {
-      return '';
-    }
-    if (!this.element) {
-      return;
-    }
-    return `
+    const markupBtn = (data, content, attr = '') =>
+      `<button class="p-pagination" type="button" data-action="${data}" ${attr}>${content} </button>`;
 
-    <style>
-        ${this.element.localName} button {
-          padding: 4px;
-          border: 1px solid tomato;
-          border-radius: 4px;
-          background-color: antiquewhite;
-        }
-      </style>
-      <div>current Page ${this.page}</div>
-    ${this.showPrevNextBtn ? '<button data-action="prev"><-</button>' : ''}
-    ${this.showFirstBtn ? ` <button data-action="1">1</button>` : ''}
-    ${
-      this.showSetPageBtnPrev
-        ? ` <button data-action="setPage">...</button>`
-        : ''
+    const prevIsDisabled = this.page === 1 ? 'disabled' : '';
+    const nextIsDisabled = this.page === this.totalPage ? 'disabled' : '';
+
+    if (this.element && 1 < this.totalPage) {
+      return `
+    ${this.showNavigationBtn ? markupBtn('prev', '<-', prevIsDisabled) : ''}
+    ${this.showFirstBtn ? markupBtn(1, 1) : ''}
+    ${this.showSetPageBtnPrev ? markupBtn('setPage', '...') : ''}
+    ${this.dynamicButtons()}
+    ${this.showSetPageBtnNext ? markupBtn('setPage', '...') : ''}
+    ${this.showBtnTotalPage ? markupBtn(this.totalPage, this.totalPage) : ''}
+    ${this.showNavigationBtn ? markupBtn('next', '->', nextIsDisabled) : ''}`;
     }
-        ${this.dynamicButtons()}
-    ${
-      this.showSetPageBtnNext
-        ? ` <button data-action="setPage">...</button>`
-        : ''
-    }
-    ${
-      this.showBtnTotalPage
-        ? `<button data-action=${this.totalPage}>${this.totalPage}</button>`
-        : ''
-    }
-    ${this.showPrevNextBtn ? ' <button data-action=next>-></button>' : ''}
-      `;
+
+    return '';
   }
 
   reset() {

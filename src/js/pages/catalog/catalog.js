@@ -10,7 +10,7 @@ const themoviedbAPI = new TMDB_API();
 
 const catalogMovieList = document.querySelector('.js-catalog-movie-list');
 const formButtonClose = document.querySelector(
-  '.js-catalog-search-form-button-close'
+  '.js-catalog-search-form-button-clear'
 );
 
 const catalogPaginationEl = document.querySelector(

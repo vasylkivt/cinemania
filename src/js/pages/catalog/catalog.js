@@ -10,7 +10,7 @@ const themoviedbAPI = new TMDB_API();
 
 const catalogMovieList = document.querySelector('.js-catalog-movie-list');
 const formButtonClose = document.querySelector(
-  '.js-catalog-search-form-button-close'
+  '.js-catalog-search-form-button-clear'
 );
 
 const catalogPaginationEl = document.querySelector(
@@ -23,6 +23,7 @@ const pagination = new PagePagination({
   element: catalogPaginationEl,
   elementLoadMoreBtn: catalogLoadMoreBtn,
   showNavigationBtn: true,
+  setDefaultStyle: false,
 });
 
 //!===================================================
@@ -74,7 +75,11 @@ const { query, queryText, select } = formEl.elements;
 query.addEventListener('input', () => {
   formButtonClose.classList.remove('is-hidden');
   queryText.placeholder = query.value;
-  if (query.value === '') formButtonClose.classList.add('is-hidden');
+
+  if (query.value === '') {
+    queryText.placeholder = 'Film';
+    formButtonClose.classList.add('is-hidden');
+  }
 });
 
 formButtonClose.addEventListener('click', () => {
@@ -131,6 +136,7 @@ function onLoadMoreClick(page) {
     getMovieList('week-movies');
   }
 }
+
 function onPaginationClick(page) {
   if (page > pagination.totalPage) {
     return;

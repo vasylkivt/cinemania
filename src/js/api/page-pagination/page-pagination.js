@@ -2,14 +2,17 @@ export class PagePagination {
   styles = ` <style>
 
 
-        .p-pagination  {
-          padding: 8px 10px;
-          margin: 4px;
+        .p-pagination,
+        .p-pagination-load-more,
+        .p-pagination-prev,
+        .p-pagination-set-page,
+        .p-pagination-next  {
+          padding: 6px;
           border: 2px solid #006494;
           border-radius: 10px;
           background-color: #e2e8f0;
-          min-height: 50px;
-          min-width: 50px;
+          min-height: 24px;
+          min-width: 24px;
         }
 
         .p-pagination-active{
@@ -66,12 +69,7 @@ export class PagePagination {
       this.showBtnTotalPage = false;
     }
 
-    if (this.element) {
-      this.element.innerHTML = this.markupPaginationBtn();
-    }
-    if (this.elementLoadMoreBtn) {
-      this.elementLoadMoreBtn.innerHTML = this.markupBtnLoadMore();
-    }
+    this.setPaginationBtn();
   }
 
   onPagination(callback) {
@@ -151,6 +149,7 @@ export class PagePagination {
 
   setPaginationBtn() {
     this.showSetPageBtnPrev = this.page > 4 ? true : false;
+
     this.showFirstBtn =
       this.page > 3 && !(this.totalPage <= this.totalButtons) ? true : false;
     this.showSetPageBtnNext = this.page < this.totalPage - 3 ? true : false;
@@ -192,10 +191,11 @@ export class PagePagination {
   }
 
   markupBtnLoadMore() {
+    // setPaginationBtn();
     return `
     ${
       this.page < this.totalPage
-        ? `<button class="p-pagination" type="button">
+        ? `<button class=" p-pagination-load-more" type="button">
         Load More
       </button>`
         : ''
@@ -204,23 +204,35 @@ export class PagePagination {
   }
 
   markupPaginationBtn() {
-    const markupBtn = (data, content, attr = '') =>
-      `<button class="p-pagination" type="button" data-action="${data}" ${attr}>${content}</button>`;
+    const markupBtn = (data, content, className, attr = '') =>
+      `<button class="${className}" type="button" data-action="${data}" ${attr}>${content}</button>`;
 
     const prevIsDisabled = this.page === 1 ? 'disabled' : '';
     const nextIsDisabled = this.page === this.totalPage ? 'disabled' : '';
 
     if (this.element && 1 < this.totalPage) {
       return `
-    ${this.showNavigationBtn ? markupBtn('prev', '<', prevIsDisabled) : ''}${
-        this.showFirstBtn ? markupBtn(1, 1) : ''
-      }${
-        this.showSetPageBtnPrev ? markupBtn('setPage', '...') : ''
+    ${
+      this.showNavigationBtn
+        ? markupBtn('prev', '<', 'p-pagination-prev', prevIsDisabled)
+        : ''
+    }${this.showFirstBtn ? markupBtn(1, 1, 'p-pagination') : ''}${
+        this.showSetPageBtnPrev
+          ? markupBtn('setPage', '...', 'p-pagination-set-page')
+          : ''
       }${this.dynamicButtons()}${
-        this.showSetPageBtnNext ? markupBtn('setPage', '...') : ''
+        this.showSetPageBtnNext
+          ? markupBtn('setPage', '...', 'p-pagination-set-page')
+          : ''
       }${
-        this.showBtnTotalPage ? markupBtn(this.totalPage, this.totalPage) : ''
-      }${this.showNavigationBtn ? markupBtn('next', '>', nextIsDisabled) : ''}`;
+        this.showBtnTotalPage
+          ? markupBtn(this.totalPage, this.totalPage, 'p-pagination')
+          : ''
+      }${
+        this.showNavigationBtn
+          ? markupBtn('next', '>', 'p-pagination-next', nextIsDisabled)
+          : ''
+      }`;
     }
 
     return '';

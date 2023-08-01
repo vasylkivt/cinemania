@@ -114,6 +114,7 @@
 }
 
 .pagination-button {
+  display: block;
   border: 1px solid transparent;
   background-image: $linear-gradient-main;
   background-origin: border-box;
@@ -121,7 +122,7 @@
   justify-content: center;
   align-self: center;
   font-size: 10px;
-  padding: 7px;
+
   border-radius: 50%;
 
   transition: box-shadow $delay $cubic, color $delay $cubic,
@@ -130,32 +131,31 @@
   @include tablet {
     font-size: 14px;
     line-height: 1.16;
-    padding: 9px;
   }
 
   @include desktop {
     line-height: 1;
-    padding: 12px;
+    font-size: 16px;
   }
-}
-
-.pagination-button-active {
-  @extend .pagination-button;
-
-  color: $text-color-light;
 }
 
 .pagination-button-no-active {
   @extend .pagination-button;
   border: 1px solid $sub-title-color;
+  color: $sub-title-color;
   box-shadow: inset 0 0 0 1000px $background-color-light;
 
-  color: $sub-title-color;
   &:hover,
   &:focus {
     color: $text-color-light;
     border: 1px solid transparent;
     box-shadow: inset 0 0 0 0 transparent, $shadow;
   }
+}
+.pagination-button-active {
+  @extend .pagination-button;
+  border: 1px solid transparent;
+  box-shadow: inset 0 0 0 0 transparent, $shadow;
+  color: $text-color-light;
 }
 /* apply this to the container you want to animate */

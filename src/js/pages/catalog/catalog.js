@@ -136,6 +136,7 @@ function onLoadMoreClick(page) {
     getMovieList('week-movies');
   }
 }
+
 function onPaginationClick(page) {
   if (page > pagination.totalPage) {
     return;

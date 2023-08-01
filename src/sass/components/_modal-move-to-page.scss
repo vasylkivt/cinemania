@@ -1,14 +1,66 @@
 .modal-move-to-page {
-  width: 300px;
+  max-width: 260px;
+  border-radius: 16px;
 
-  background-color: #8a8a8a;
-  padding: 50px 30px;
+  background-color: $background-color-dark;
+  box-shadow: $shadow-hover;
+  padding: 20px 20px;
 
-  & form button {
-    background-color: rgb(191, 191, 191);
-    padding: 5px;
+  & .move-to-page-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  & .move-to-page-form-input {
+    max-width: 150px;
+    height: 100%;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid $white;
+    background-color: transparent;
+
+    color: $sub-title-color;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.14;
+
+    @include tablet {
+      padding: 12px 20px;
+    }
+
+    @include desktop {
+      padding: 12px 24px;
+    }
+  }
+
+  & .modal-move-to-page-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    & svg {
+      stroke: #fff;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  & .move-to-page-button {
+    padding: 4px 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
   }
 }
 
-// .backdrop-move-to-page {
-// }
+.backdrop-move-to-page {
+  width: auto;
+  height: auto;
+  position: absolute;
+  bottom: 30px;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: transparent;
+}

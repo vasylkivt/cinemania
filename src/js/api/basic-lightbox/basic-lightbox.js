@@ -7,6 +7,11 @@ const handlerEsc = function (evt) {
   if (evt.code === 'Escape') this.close();
 };
 
+const backdropClick = function (evt) {
+  if (evt.target.offsetParent.className !== 'basicLightbox__placeholder')
+    this.close();
+};
+
 const openModal = movie =>
   basicLightbox.create(markupModalMovieCard(movie), {
     handlerEscape: null,
@@ -74,10 +79,12 @@ const errorMessage = markupError =>
 const modalMoveToPage = (markup, callback) =>
   basicLightbox.create(markup, {
     handlerEscape: null,
+    handlerBackdropClick: null,
     page: null,
     className: 'backdrop-move-to-page',
     onShow(instance) {
-      // ScrollService.blockScroll();
+      const div = document.querySelector('.js-catalog-pagination-btn-wrap');
+
       instance.element().querySelector('.js-close-modal-btn').onclick =
         instance.close;
       this.handlerEscape = handlerEsc.bind(instance);
@@ -91,13 +98,18 @@ const modalMoveToPage = (markup, callback) =>
           this.page = Number(e.currentTarget.elements.pageInput.value);
           instance.close();
         });
+
+      setTimeout(() => {
+        this.handlerBackdropClick = backdropClick.bind(instance);
+        document.addEventListener('click', this.handlerBackdropClick);
+        div.appendChild(instance.element());
+      }, 0);
     },
     onClose() {
-      // ScrollService.restoreScroll();
       if (this.page) {
         callback(this.page);
       }
-
+      document.removeEventListener('click', this.handlerBackdropClick);
       document.removeEventListener('keydown', this.handlerEscape);
     },
   });

@@ -32,6 +32,7 @@
           <option value="2021">2021</option>
         </select>
         <input
+          autocomplete="off"
           placeholder="Search"
           id="query"
           required
@@ -53,10 +54,12 @@
       class="js-open-modal-movie js-catalog-movie-list movie-list catalog-movie-list"
     ></ul>
 
-    <div class="js-catalog-pagination">
+    <div class="js-catalog-pagination catalog-pagination">
       <div class="js-catalog-load-more"></div>
 
-      <div class="js-catalog-pagination-btn-wrap"></div>
+      <div
+        class="js-catalog-pagination-btn-wrap catalog-pagination-btn-wrap"
+      ></div>
     </div>
   </div>
 </section>

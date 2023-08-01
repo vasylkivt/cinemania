@@ -23,6 +23,7 @@ const pagination = new PagePagination({
   element: catalogPaginationEl,
   elementLoadMoreBtn: catalogLoadMoreBtn,
   showNavigationBtn: true,
+  setDefaultStyle: false,
 });
 
 //!===================================================

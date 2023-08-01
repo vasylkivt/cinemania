@@ -107,6 +107,18 @@ body,
     background-color: $background-color-dark;
   }
 
+  & .pagination-button-active {
+    color: $text-color-dark;
+  }
+
+  & .pagination-button-no-active {
+    border: 1px solid $grey-white-theme;
+    color: $grey-white-theme;
+    &:hover {
+      color: $text-color-dark;
+    }
+  }
+
   // & .hero-text {
   //   color: $text-color-dark;
   // }

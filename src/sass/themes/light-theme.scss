@@ -119,6 +119,27 @@ body,
     }
   }
 
+  & .search-button-dark-theme {
+    & svg {
+      stroke: $black;
+    }
+  }
+
+  & .catalog-search-query-text,
+  & .catalog-search-input,
+  .catalog-search-select {
+    border: 1px solid $grey-white-theme;
+    color: $grey-white-theme;
+  }
+
+  & .catalog-search-form-button-clear-wrap {
+    & .catalog-search-form-button-clear {
+      & svg {
+        stroke: $grey-white-theme;
+      }
+    }
+  }
+
   // & .hero-text {
   //   color: $text-color-dark;
   // }

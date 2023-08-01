@@ -75,7 +75,11 @@ const { query, queryText, select } = formEl.elements;
 query.addEventListener('input', () => {
   formButtonClose.classList.remove('is-hidden');
   queryText.placeholder = query.value;
-  if (query.value === '') formButtonClose.classList.add('is-hidden');
+
+  if (query.value === '') {
+    queryText.placeholder = 'Film';
+    formButtonClose.classList.add('is-hidden');
+  }
 });
 
 formButtonClose.addEventListener('click', () => {

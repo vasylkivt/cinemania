@@ -6,10 +6,27 @@
   box-shadow: $shadow-hover;
   padding: 20px 20px;
 
+  @include tablet {
+    max-width: 360px;
+    padding: 25px 30px;
+  }
+
+  @include desktop {
+    max-width: 260px;
+  }
+
   & .move-to-page-form {
     display: flex;
     align-items: center;
     gap: 5px;
+
+    @include tablet {
+      gap: 15px;
+    }
+
+    @include desktop {
+      gap: 15px;
+    }
   }
 
   & .move-to-page-form-input {
@@ -38,6 +55,16 @@
     position: absolute;
     top: 5px;
     right: 5px;
+
+    @include tablet {
+      top: 8px;
+      right: 8px;
+    }
+
+    @include desktop {
+      top: 10px;
+      right: 10px;
+    }
     & svg {
       stroke: #fff;
       width: 20px;
@@ -50,6 +77,9 @@
     height: 40px;
     width: 40px;
     border-radius: 50%;
+    @include tablet {
+      font-size: 12px;
+    }
   }
 }
 

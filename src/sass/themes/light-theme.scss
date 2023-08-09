@@ -114,6 +114,7 @@ body,
   & .pagination-button-no-active {
     border: 1px solid $grey-white-theme;
     color: $grey-white-theme;
+    box-shadow: inset 0 0 0 1000px $background-color-light;
     &:hover {
       color: $text-color-dark;
     }
@@ -140,28 +141,10 @@ body,
     }
   }
 
-  // & .hero-text {
-  //   color: $text-color-dark;
-  // }
-
-  // & .hero-title {
-  //   color: $text-color-dark;
-  // }
-
-  // & .hero-wrapper .swiper-slide::before {
-  //   background-image: linear-gradient(
-  //       90deg,
-  //       rgba(0, 0, 0, 0.8) 0%,
-  //       rgba(255, 255, 255, 0) 60%,
-  //       rgba(255, 255, 255, 0) 60%,
-  //       rgba(255, 255, 255, 1) 100%
-  //     ),
-  //     linear-gradient(
-  //       180deg,
-  //       rgba(255, 255, 255, 0.5) 0%,
-  //       rgba(255, 255, 255, 0) 35%,
-  //       rgba(255, 255, 255, 0) 65%,
-  //       rgba(255, 255, 255.5) 100%
-  //     );
-  // }
+  & .catalog-pagination .p-pagination-prev,
+  & .catalog-pagination .p-pagination-next {
+    & svg {
+      stroke: $grey-white-theme;
+    }
+  }
 }

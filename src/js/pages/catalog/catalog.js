@@ -6,6 +6,15 @@ import {
   markupGoToPage,
 } from '../../components';
 
+import svgCloseIcon from '../../../images/icon/sprite.svg';
+
+const svgIconPrev = `<svg class="pagination-btn-icon-prev">
+          <use href="${svgCloseIcon}#icon-prev"></use>
+        </svg>`;
+const svgIconNext = `<svg class="pagination-btn-icon-next">
+          <use href="${svgCloseIcon}#icon-next"></use>
+        </svg>`;
+
 const themoviedbAPI = new TMDB_API();
 
 const catalogMovieList = document.querySelector('.js-catalog-movie-list');
@@ -24,6 +33,8 @@ const pagination = new PagePagination({
   elementLoadMoreBtn: catalogLoadMoreBtn,
   showNavigationBtn: true,
   setDefaultStyle: false,
+  buttonPrev: svgIconPrev,
+  buttonNext: svgIconNext,
 });
 
 //!===================================================

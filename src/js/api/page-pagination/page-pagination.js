@@ -28,6 +28,9 @@ export class PagePagination {
 
   totalButtons = 5;
 
+  buttonPrev = null;
+  buttonNext = null;
+
   showSetPageBtnPrev = false;
   showSetPageBtnNext = true;
   showFirstBtn = false;
@@ -41,7 +44,11 @@ export class PagePagination {
     elementLoadMoreBtn,
     showNavigationBtn = false,
     setDefaultStyle = true,
+    buttonPrev,
+    buttonNext,
   }) {
+    this.buttonPrev = buttonPrev;
+    this.buttonNext = buttonNext;
     this.showNavigationBtn = showNavigationBtn;
     this.setDefaultStyle = setDefaultStyle;
 
@@ -214,7 +221,12 @@ export class PagePagination {
       return `
     ${
       this.showNavigationBtn
-        ? markupBtn('prev', '<', 'p-pagination-prev', prevIsDisabled)
+        ? markupBtn(
+            'prev',
+            this.buttonPrev ? this.buttonPrev : '<',
+            'p-pagination-prev',
+            prevIsDisabled
+          )
         : ''
     }${this.showFirstBtn ? markupBtn(1, 1, 'p-pagination') : ''}${
         this.showSetPageBtnPrev
@@ -230,7 +242,13 @@ export class PagePagination {
           : ''
       }${
         this.showNavigationBtn
-          ? markupBtn('next', '>', 'p-pagination-next', nextIsDisabled)
+          ? markupBtn(
+              'next',
+              this.buttonNext ? this.buttonNext : '>',
+
+              'p-pagination-next',
+              nextIsDisabled
+            )
           : ''
       }`;
     }

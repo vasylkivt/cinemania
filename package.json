@@ -5,7 +5,8 @@
   "homepage": "https://vasylkivt.github.io/cinemania",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /cinemania/"
+    "build": "parcel build src/*.html --public-url /cinemania/",
+    "buildnetlify": "parcel build src/*.html --public-url /"
   },
   "repository": {
     "type": "git",

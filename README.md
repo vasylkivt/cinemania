@@ -83,7 +83,7 @@ To get started with Cinemania, follow these steps:
 4. Install dependencies: `npm install`
 5. Start the development server: `npm start`
 6. Open your web browser and go to
-   [ http://localhost:5173/](http://localhost:1234/). The page will
+   [ http://localhost:1234](http://localhost:1234). The page will
    automatically refresh whenever you save changes to project files.
 
 ## Usage

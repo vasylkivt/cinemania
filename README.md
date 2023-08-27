@@ -1,4 +1,4 @@
-# Cinemania
+# Cinemania [![Netlify Status](https://api.netlify.com/api/v1/badges/d5289523-7d3c-4b11-a413-768e7e1e9c1b/deploy-status)](https://app.netlify.com/sites/vasylkiv-cinemania/deploys) [🌐 Netlify link](https://vasylkiv-cinemania.netlify.app)
 
 🎞Cinemania📽 is the ultimate destination for all things movies, providing you
 with comprehensive information and keeping you in the loop with the latest news🗞

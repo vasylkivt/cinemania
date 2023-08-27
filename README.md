@@ -76,13 +76,15 @@ their journey into the world of cinema and simplifies their discovery.
 To get started with Cinemania, follow these steps:
 
 1. Clone the repository:
-   `git clone https://github.com/your-username/cinemania.git`
-2. Navigate to the project folder: `cd cinemania`
-3. Make sure you have the LTS version of Node.js installed on your computer.
+   ```bash
+   git clone https://github.com/your-username/cinemania.git
+   ```
+3. Navigate to the project folder: `cd cinemania`
+4. Make sure you have the LTS version of Node.js installed on your computer.
    [Download and install](https://nodejs.org/en/) it if needed
-4. Install dependencies: `npm install`
-5. Start the development server: `npm start`
-6. Open your web browser and go to
+5. Install dependencies: `npm install`
+6. Start the development server: `npm start`
+7. Open your web browser and go to
    [ http://localhost:1234](http://localhost:1234). The page will
    automatically refresh whenever you save changes to project files.
 

@@ -5,3 +5,5 @@ import './js/events/init-theme';
 import './js/events/active-page';
 import './js/events/mobile-menu';
 import './js/events/modal-movie-open';
+
+import './js/pages/my-library/my-library';
